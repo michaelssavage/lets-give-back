@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "tailwindcss/theme";
+@import "./reset.css";
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --color-primary: oklch(0.6609 0.1954 37.35); /* #F15A29 */
+  --color-light-orange: oklch(0.7768 0.1152 37.47); /* #f69c81 */
+  --color-card: oklch(0.972 0.006 17.25); /* #F3EEEE */
+
+  --color-secondary: oklch(0.2932 0.0464 245.72); /* #172e42 */
+  --color-black: oklch(0.2603 0 0); /* #242424 */
+
+  --color-white: oklch(0.953 0.0054 17.25); /* #F3EEEE */
+  --color-silver: oklch(0.8258 0.0183 81.32); /* #ccc5b9 */
+}
+
+@layer base {
+  html {
+    overscroll-behavior: none;
+  }
+
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
+  }
+
+  button[disabled],
+  [role="button"][disabled] {
+    cursor: not-allowed;
+  }
+
+  button:active {
+    transform: scale(1.05);
+  }
+
+  h1 {
+    @apply text-3xl font-bold md:text-4xl lg:text-5xl xl:text-6xl;
+  }
+
+  h2 {
+    @apply text-2xl font-bold md:text-3xl lg:text-4xl xl:text-5xl;
+  }
+
+  h3 {
+    @apply text-xl font-bold md:text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-lg font-bold md:text-xl lg:text-2xl;
+  }
+
+  h5 {
+    @apply text-base font-bold md:text-lg;
+  }
+
+  h6 {
+    @apply text-sm font-bold md:text-base;
+  }
+}

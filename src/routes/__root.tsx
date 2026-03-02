@@ -1,51 +1,59 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
-import Header from '../components/Header'
-
-import appCss from '../styles.css?url'
+import { Footer } from "@/components/footer";
+import { Layout } from "@/components/layout";
+import { Navbar } from "@/components/navbar";
+import type { ReactNode } from "react";
+import appCss from "../styles/root.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
+      { charSet: "utf-8" },
+      { title: "Let's Give Back" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { property: "og:title", content: "Let's Give Back" },
+      { property: "og:site_name", content: "Let's Give Back" },
       {
-        charSet: 'utf-8',
+        property: "description",
+        content:
+          "A community-focused organisation with a primary mission to support key groups",
       },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        property: "og:description",
+        content:
+          "A community-focused organisation with a primary mission to support key groups",
       },
-      {
-        title: 'TanStack Start Starter',
-      },
+      { property: "og:type", content: "website" },
     ],
     links: [
       {
-        rel: 'stylesheet',
+        rel: "stylesheet",
         href: appCss,
       },
     ],
   }),
   shellComponent: RootDocument,
-})
+});
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
+        <Navbar />
+        <Layout>{children}</Layout>
+        <Footer />
+
         <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
+          config={{ position: "bottom-right" }}
           plugins={[
             {
-              name: 'Tanstack Router',
+              name: "Tanstack Router",
               render: <TanStackRouterDevtoolsPanel />,
             },
           ]}
@@ -53,5 +61,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
