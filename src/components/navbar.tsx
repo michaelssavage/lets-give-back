@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { SITE_NAME } from "../utils/constants";
 
 const links = [
   { label: "Home", to: "/" },
@@ -10,21 +9,30 @@ const links = [
 
 export const Navbar = () => {
   return (
-    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-60 transition-all">
-      <nav className="text-dark-blue rounded-2xl flex items-center justify-between gap-16 px-8 py-4 transition-all duration-200 w-full">
-        <h1 className="text-xl font-bold text-nowrap hover:text-primary-blue uppercase">
-          <Link to="/">{SITE_NAME}</Link>
-        </h1>
+    <header className="py-8 px-4 bg-card">
+      <nav className="text-dark-blue rounded-2xl flex items-center justify-between mx-4">
+        <Link
+          to="/"
+          className="shrink-0 px-6 hover:rotate-12 transition-transform duration-200"
+        >
+          <img
+            src="/logo-transparent.png"
+            alt="Let's Give Back"
+            className="size-24"
+          />
+        </Link>
 
-        <ul className="flex items-center gap-6">
+        <div className="flex items-center">
           {links.map((link) => (
-            <li key={link.to} className="text-lg uppercase font-semibold">
-              <Link to={link.to} className="hover:text-primary-blue">
-                {link.label}
-              </Link>
-            </li>
+            <Link
+              to={link.label}
+              key={link.to}
+              className="text-2xl font-hanneat uppercase font-semibold px-4 hover:text-primary-orange"
+            >
+              {link.label}
+            </Link>
           ))}
-        </ul>
+        </div>
       </nav>
     </header>
   );

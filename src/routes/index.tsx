@@ -1,79 +1,117 @@
+import { Card } from "@/components/card";
+import { HeartIcon } from "@/components/heart.icon";
 import { createFileRoute } from "@tanstack/react-router";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 export const Route = createFileRoute("/")({ component: App });
 
-const services = [
-  {
-    title: "Community Projects",
-    description: "Bringing people together through hands-on projects",
-  },
-  {
-    title: "Mobile Coffee Truck",
-    description: "Serving coffee and community",
-  },
-  {
-    title: "Community Gardens",
-    description: "Transforming spaces into thriving green areas",
-  },
-  {
-    title: "Youth Engagement",
-    description: "Creating positive activities for young people",
-  },
-  {
-    title: "Mental Health Support",
-    description:
-      "Providing resources and support for individuals facing mental health challenges",
-  },
-  {
-    title: "Addiction Recovery",
-    description: "Supporting those recovering from addiction",
-  },
-  {
-    title: "Elderly Support",
-    description:
-      "Creating opportunities for social engagement and support for the elderly",
-  },
+const SUPPORTED_GROUPS = [
+  "Elderly residents",
+  "Nursing homes",
+  "Disability residential services",
+  "Community centres",
+  "Addiction Services",
+  "Young person residential care settings",
+];
+
+const row1 = [
+  "WASH YARDS",
+  "CLEAR GARDENS",
+  "CUT BACK HEDGES",
+  "PAINT WALLS",
+  "FIX FENCES",
+];
+
+const row2 = [
+  "BUILD SEATING",
+  "REPAIR TIMBER",
+  "PATCH BOARDS",
+  "GENERAL MAINTENANCE",
 ];
 
 function App() {
-  return (
-    <div className="space-y-8 max-w-5xl mx-auto">
-      <section className="flex flex-col items-center justify-center gap-4 [&_p]:text-lg">
-        <h1 className="mb-4">
-          Building Skills,{" "}
-          <span className="text-primary">Building Community</span>
-        </h1>
-        <p>
-          Let&apos;s Give Back is a community-focused organisation with a
-          primary mission to support key groups such as youth, individuals
-          facing mental health challenges, those recovering from addiction, and
-          the elderly.
-        </p>
+  const ref = useRef(null);
 
-        <p>
-          We bring people together through hands-on projects that build skills,
-          confidence, and connection. Local hands. National impact. Shared
-          community pride.
-        </p>
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Adjust values for more/less movement
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+  return (
+    <div>
+      <section className="bg-card p-12 min-h-[60vh] grid place-items-center">
+        <div className="flex flex-col items-center justify-center gap-8 max-w-5xl mx-auto mb-16">
+          <h1 className="font-bold text-center text-3xl md:text-6xl lg:text-7xl">
+            Let&apos;s Give Back
+          </h1>
+          <p className="text-lg text-center text-balance leading-[2.5]">
+            We are a{" "}
+            <span className="badge leading-tight">community-focused</span>{" "}
+            organisation with a primary mission to support key groups such as
+            youth, individuals facing mental health challenges, those recovering
+            from addiction, and the elderly.
+          </p>
+        </div>
       </section>
 
-      <section className="grid grid-cols-2 gap-4 md:gap-6">
-        {services.map((service) => (
-          <div
-            key={service.title}
-            className="bg-card rounded-2xl p-6 border border-border shadow-sm flex flex-col justify-center gap-2"
-          >
-            <h2 className="text-lg text-foreground">{service.title}</h2>
-            <p className="text-muted-foreground text-sm">
-              {service.description}
-            </p>
-          </div>
-        ))}
+      <section
+        ref={ref}
+        className="relative overflow-hidden bg-white min-h-[80vh] grid place-items-center"
+      >
+        <div className="absolute inset-0 z-8 flex flex-col justify-center gap-8 opacity-20 pointer-events-none">
+          {Array.from({ length: 8 }, (_, i) => {
+            const items = i % 2 === 0 ? row1 : row2;
+            const x = i % 2 === 0 ? x1 : x2;
+            return (
+              <motion.div
+                key={i}
+                style={{ x }}
+                className="flex gap-12 whitespace-nowrap text-4xl font-bold"
+              >
+                {[...items, ...items].map((item, j) => (
+                  <span key={j}>{item}</span>
+                ))}
+              </motion.div>
+            );
+          })}
+        </div>
 
-        <div className="bg-card rounded-2xl p-6 border border-border shadow-sm flex items-center justify-center">
-          <h2 className="text-2xl font-bold text-foreground text-center">
-            Local hands. National impact. Shared community pride.
+        <Card className="relative z-10 my-24">
+          <HeartIcon
+            color="#F15A29"
+            size={64}
+            className="absolute -top-4 -right-4"
+          />
+          <h2 className="text-3xl md:text-4xl font-bold text-center">
+            Building Skills, Building Community
           </h2>
+          <p className="text-lg text-center text-balance">
+            At Let&apos;s Give Back CLG, we offer small maintenance and outdoor
+            improvement services for people and organisations supporting
+            vulnerable members of our community
+          </p>
+        </Card>
+      </section>
+
+      <section className="bg-light-blue p-12 min-h-[60vh] grid place-items-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-center">
+          Who do we support?
+        </h2>
+        <p>(Everyone)</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {SUPPORTED_GROUPS.map((group) => (
+            <p
+              key={group}
+              className="grid place-items-center text-2xl card-shadow rounded-2xl py-4 px-6 bg-white font-bold text-center"
+            >
+              {group}
+            </p>
+          ))}
         </div>
       </section>
     </div>
