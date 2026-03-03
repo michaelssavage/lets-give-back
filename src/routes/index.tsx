@@ -1,5 +1,5 @@
 import { Card } from "@/components/card";
-import { HeartIcon } from "@/components/heart.icon";
+import { HeartIcon } from "@/components/icons/heart.icon";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
