@@ -7,15 +7,15 @@ import { Mail } from "lucide-react";
 export const Footer = () => {
   return (
     <footer className="px-4 py-8 bg-primary-blue text-white">
-      <div className="flex items-center gap-4 mb-8 mx-16">
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 mx-16">
         <img src="/logo-orange.png" alt="Let's Give Back" className="size-24" />
 
-        <div>
+        <div className="text-center md:text-left">
           <p className="text-2xl font-bold">Let&apos;s Give Back CLG</p>
           <p>Based in Co. Monaghan, Ireland.</p>
         </div>
 
-        <div className="ml-auto flex flex-col gap-4 [&>a]:justify-end">
+        <div className="md:ml-auto flex flex-col gap-4 [&>a]:justify-center md:[&>a]:justify-end">
           <Anchor
             href={`https://wa.me/${PHONE_NUMBER}`}
             className="hover:text-primary-orange hover:[&>svg]:fill-primary-orange"
