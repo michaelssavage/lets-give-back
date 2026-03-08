@@ -5,7 +5,9 @@
 @theme {
   --font-dm-sans: "DM Sans", sans-serif;
   --font-hanneat: "Hanneat", sans-serif;
+
   --color-text: oklch(0.2603 0 0); /* 242424 */
+  --color-secondary: oklch(0.3831 0.0141 45.49); /* 4a413d */
   --color-background: oklch(0.953 0.0054 17.25); /* F3EEEE */
 
   --color-dark-blue: oklch(0.2724 0.041 277.36); /* 22253b */
