@@ -14,7 +14,7 @@ export const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="py-4 md:py-8 px-0 md:px-4 bg-card relative">
+    <header className="pt-4 md:pt-8 px-0 md:px-4 bg-card relative">
       <nav className="text-dark-blue rounded-2xl flex items-center justify-between mx-4">
         <Link
           to="/"
@@ -23,7 +23,7 @@ export const Navbar = () => {
           <img
             src="/logo-transparent.png"
             alt="Let's Give Back"
-            className="size-12 md:size-24"
+            className="size-16 md:size-32"
           />
         </Link>
 

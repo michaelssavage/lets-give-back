@@ -16,18 +16,21 @@ const SUPPORTED_GROUPS = [
 ];
 
 const row1 = [
-  "WASH YARDS",
-  "CLEAR GARDENS",
-  "CUT BACK HEDGES",
-  "PAINT WALLS",
-  "FIX FENCES",
+  "/tools/hammer.svg",
+  "/tools/paint-roller.svg",
+  "/tools/shovel.svg",
+  "/tools/wrench.svg",
+  "/tools/hand-saw.svg",
+  "/tools/screwdriver.svg",
 ];
 
 const row2 = [
-  "BUILD SEATING",
-  "REPAIR TIMBER",
-  "PATCH BOARDS",
-  "GENERAL MAINTENANCE",
+  "/tools/axe.svg",
+  "/tools/cordless-drill.svg",
+  "/tools/flashlight.svg",
+  "/tools/flower-pot.svg",
+  "/tools/pliers.svg",
+  "/tools/tools.svg",
 ];
 
 function App() {
@@ -38,20 +41,32 @@ function App() {
     offset: ["start end", "end start"],
   });
 
-  // Adjust values for more/less movement
-  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-  const x2 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  // Start both rows offset left so content always fills both sides
+  const x1 = useTransform(scrollYProgress, [0, 1], ["-5%", "-20%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-20%", "-5%"]);
+
+  const badgeRotate = useTransform(
+    scrollYProgress,
+    [0, 0.2],
+    ["-4deg", "0deg"]
+  );
 
   return (
     <div>
-      <section className="bg-card px-6 py-12 md:p-12 min-h-[60vh] grid place-items-center">
+      <section className="bg-card px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
         <div className="flex flex-col items-center justify-center gap-8 max-w-5xl mx-auto mb-8 md:mb-16">
           <h1 className="font-bold text-center text-5xl md:text-6xl lg:text-7xl">
             Let&apos;s Give Back
           </h1>
           <p className="text-lg text-center text-balance leading-[2.5]">
             We are a{" "}
-            <span className="badge leading-tight">community-focused</span>{" "}
+            <motion.span
+              style={{ rotate: badgeRotate }}
+              whileHover={{ rotate: "0deg", transition: { duration: 0.2 } }}
+              className="badge leading-tight"
+            >
+              community-focused
+            </motion.span>{" "}
             organisation with a primary mission to support key groups such as
             youth, individuals facing mental health challenges, those recovering
             from addiction, and the elderly.
@@ -71,19 +86,24 @@ function App() {
               <motion.div
                 key={i}
                 style={{ x }}
-                className="flex gap-12 whitespace-nowrap text-4xl font-bold"
+                className="flex gap-12 items-center"
               >
-                {[...items, ...items].map((item, j) => (
-                  <span key={j}>{item}</span>
+                {[...items, ...items, ...items].map((item, j) => (
+                  <img
+                    key={j}
+                    src={item}
+                    alt=""
+                    className="size-16 md:size-24"
+                  />
                 ))}
               </motion.div>
             );
           })}
         </div>
 
-        <Card className="relative z-10 my-12 md:my-24 mx-4">
+        <Card className="relative z-10 my-12 md:my-24 mx-4 bg-light-orange">
           <HeartIcon
-            color="#F15A29"
+            color="var(--color-primary-orange)"
             className="absolute -top-4 -right-4 size-12 md:size-16"
           />
           <h2 className="text-3xl md:text-4xl font-bold text-center">

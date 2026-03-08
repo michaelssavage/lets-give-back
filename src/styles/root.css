@@ -12,7 +12,7 @@
   --color-primary-blue: oklch(0.5456 0.253 274.1); /* 4e4eff */
 
   --color-dark-orange: oklch(0.5575 0.1954 37.35); /* cc3600 */
-  --color-primary-orange: oklch(0.6609 0.1954 37.35); /* F15A29 */
+  --color-primary-orange: oklch(0.6598 0.1961 36.87); /* f1592a */
 
   --color-light-blue: oklch(0.9142 0.0352 250.87) /* d2e5fa */;
   --color-light-green: oklch(0.9536 0.0308 137.82) /* e6f5e1 */;
@@ -97,11 +97,6 @@
   }
 
   .badge {
-    @apply inline-block text-dark-blue bg-light-blue font-bold px-2 py-1 rounded-md border border-dark-blue transition-transform duration-200;
-    transform: rotate(-4deg);
-
-    &:hover {
-      transform: rotate(0deg);
-    }
+    @apply inline-block text-white bg-primary-orange font-bold px-2 py-1 rounded-md border border-dark-blue;
   }
 }
