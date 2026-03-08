@@ -54,7 +54,7 @@ export const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="absolute top-full inset-x-0 w-full bg-card shadow-lg rounded-xl z-11 mt-4 py-6 flex flex-col items-center md:hidden"
+              className="absolute top-full inset-x-0 w-full bg-card shadow-lg rounded-xl z-11 py-6 flex flex-col items-center md:hidden"
             >
               {links.map((link) => (
                 <Link

@@ -78,7 +78,7 @@ function RouteComponent() {
         </h1>
         <p className="text-secondary mb-4 text-center md:text-left">
           Have a project in mind or want to learn more? Send us a message and
-          we&apos;ll get back to you. Give us a text on
+          we&apos;ll get back to you. Give us a text on{" "}
           <Anchor
             href="https://wa.me/353874376999"
             className="hover:text-primary-orange inline-flex items-baseline"
