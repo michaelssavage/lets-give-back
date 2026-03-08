@@ -90,15 +90,15 @@
   h6 {
     @apply font-bold text-sm md:text-base;
   }
+
+  .badge {
+    @apply inline-block text-black bg-light-blue font-bold px-2 py-1 rounded-md border border-dark-blue;
+  }
 }
 
 @layer utilities {
   .card-shadow {
     /* box-shadow: horziontal, vertical, blur, color; */
     box-shadow: 6px 6px 2px var(--color-text);
-  }
-
-  .badge {
-    @apply inline-block text-white bg-primary-orange font-bold px-2 py-1 rounded-md border border-dark-blue;
   }
 }

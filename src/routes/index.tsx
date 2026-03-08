@@ -1,6 +1,8 @@
+import { buttonStyles } from "@/components/button/button.styles";
 import { Card } from "@/components/card";
 import { HeartIcon } from "@/components/icons/heart.icon";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRightIcon } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
@@ -71,6 +73,10 @@ function App() {
             youth, individuals facing mental health challenges, those recovering
             from addiction, and the elderly.
           </p>
+
+          <Link to="/contact" className={buttonStyles({ variant: "primary" })}>
+            Get in touch
+          </Link>
         </div>
       </section>
 
@@ -114,6 +120,17 @@ function App() {
             improvement services for people and organisations supporting
             vulnerable members of our community
           </p>
+
+          <Link
+            to="/services"
+            className={buttonStyles({
+              variant: "ghost",
+              className: "flex items-center gap-1 hover:[&_svg]:translate-x-1",
+            })}
+          >
+            View our services
+            <ArrowRightIcon className="size-6" />
+          </Link>
         </Card>
       </section>
 

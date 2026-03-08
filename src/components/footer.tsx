@@ -1,7 +1,12 @@
 import { Anchor } from "@/components/anchor";
 import { FacebookIcon } from "@/components/icons/facebook.icon";
 import { WhatsappIcon } from "@/components/icons/whatsapp.icon";
-import { EMAIL_ADDRESS, FACEBOOK_URL, PHONE_NUMBER } from "@/utils/constants";
+import {
+  EMAIL_ADDRESS,
+  FACEBOOK_URL,
+  MONAGHAN_MAP_LINK,
+  PHONE_NUMBER,
+} from "@/utils/constants";
 import { Mail, Phone } from "lucide-react";
 
 export const Footer = () => {
@@ -17,16 +22,26 @@ export const Footer = () => {
 
           <div className="text-center md:text-left">
             <p className="text-4xl font-bold">Let&apos;s Give Back CLG</p>
-            <p>Based in Co. Monaghan, Ireland.</p>
+            <p>
+              Based in{" "}
+              <Anchor
+                href={MONAGHAN_MAP_LINK}
+                isExternal
+                className="hover:text-black hover:[&>svg]:stroke-black inline-flex gap-1 items-baseline"
+              >
+                Co. Monaghan
+              </Anchor>
+              , Ireland.
+            </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-center mx-auto md:mx-0 md:items-start flex-wrap gap-4">
+        <div className="flex flex-col items-center mx-auto md:mx-0 md:items-start flex-wrap gap-2">
           <p className="text-2xl font-bold">Get In Touch</p>
           <div className="flex flex-row flex-wrap gap-4">
             <Anchor
               href={`https://wa.me/${PHONE_NUMBER}`}
-              className="hover:text-light-orange hover:[&>svg]:fill-light-orange"
+              className="hover:text-black hover:[&>svg]:fill-black"
               isExternal
             >
               <WhatsappIcon size={24} className="fill-white" />
@@ -34,15 +49,15 @@ export const Footer = () => {
             </Anchor>
             <Anchor
               href={`tel:${PHONE_NUMBER}`}
-              className="hover:text-light-orange hover:[&>svg]:fill-light-orange"
+              className="hover:text-black hover:[&>svg]:stroke-black"
               isExternal
             >
-              <Phone size={24} className="fill-white" />
+              <Phone size={24} className="stroke-white" />
               {PHONE_NUMBER}
             </Anchor>
             <Anchor
               href={FACEBOOK_URL}
-              className="hover:text-light-orange hover:[&>svg]:fill-light-orange"
+              className="hover:text-black hover:[&>svg]:fill-black"
               isExternal
             >
               <FacebookIcon size={24} className="fill-white" />
@@ -50,7 +65,7 @@ export const Footer = () => {
             </Anchor>
             <Anchor
               href={`mailto:${EMAIL_ADDRESS}`}
-              className="hover:text-light-orange hover:[&>svg]:stroke-light-orange"
+              className="hover:text-black hover:[&>svg]:stroke-black"
               isExternal
             >
               <Mail size={24} />

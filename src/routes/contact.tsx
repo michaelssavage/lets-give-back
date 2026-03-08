@@ -3,8 +3,10 @@ import {
   sendContactEmail,
   type ContactFormData,
 } from "@/api/send-email.api";
+import { Anchor } from "@/components/anchor";
 import { PhoneInput } from "@/components/form/PhoneInput";
 import { TextInput } from "@/components/form/TextInput";
+import { PHONE_NUMBER } from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
@@ -69,14 +71,48 @@ function RouteComponent() {
   }
 
   return (
-    <section className="min-h-[70vh] grid place-items-center px-6 py-12">
-      <div className="w-full max-w-xl flex flex-col gap-8">
+    <section className="min-h-[70vh] flex flex-col-reverse md:flex-row gap-8 px-6 md:px-12 py-12">
+      <div className="flex flex-col gap-4 mt-8">
+        <h1 className="text-4xl font-bold text-center md:text-left">
+          Let&apos;s Build Something Meaningful Together
+        </h1>
+        <p className="text-secondary mb-4 text-center md:text-left">
+          Have a project in mind or want to learn more? Send us a message and
+          we&apos;ll get back to you. Give us a text on
+          <Anchor
+            href="https://wa.me/353874376999"
+            className="hover:text-primary-orange inline-flex items-baseline"
+            isExternal
+          >
+            WhatsApp
+          </Anchor>
+          {", "}
+          or call us at{" "}
+          <Anchor
+            href={`tel:${PHONE_NUMBER}`}
+            className="hover:text-primary-orange inline-flex items-baseline"
+            isExternal
+          >
+            {PHONE_NUMBER}
+          </Anchor>{" "}
+          if you prefer.
+        </p>
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d598049.9775066919!2d-7.603985724579202!3d54.160012524398496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48609f42f90be0fb%3A0xd600e0191225b84f!2sMonaghan%2C%20Co.%20Monaghan%2C%20Ireland!5e0!3m2!1sen!2ses!4v1773012139180!5m2!1sen!2ses"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Monaghan, Ireland"
+        />
+      </div>
+
+      <div className="mx-auto md:mx-0 w-full max-w-xl flex flex-col gap-8 bg-white card-shadow rounded-2xl p-8">
         <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-bold">Get in touch</h1>
-          <p className=" text-secondary">
-            Have a project in mind or want to learn more? Send us a message and
-            we&apos;ll get back to you.
-          </p>
+          <h2 className="text-4xl font-bold">Get in touch</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
