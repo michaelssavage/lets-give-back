@@ -12,7 +12,7 @@ import { Mail, Phone } from "lucide-react";
 export const Footer = () => {
   return (
     <footer className="px-4 pt-8 pb-4 bg-primary-orange text-white">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8 mx-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8 mx-2 md:mx-8">
         <div className="flex flex-col md:flex-row mx-auto md:mx-0 items-center gap-4">
           <img
             src="/logo-orange.png"
@@ -21,7 +21,9 @@ export const Footer = () => {
           />
 
           <div className="text-center md:text-left">
-            <p className="text-4xl font-bold">Let&apos;s Give Back CLG</p>
+            <p className="text-3xl md:text-4xl font-bold">
+              Let&apos;s Give Back CLG
+            </p>
             <p>
               Based in{" "}
               <Anchor
@@ -38,7 +40,7 @@ export const Footer = () => {
 
         <div className="flex flex-col items-center mx-auto md:mx-0 md:items-start flex-wrap gap-2">
           <p className="text-2xl font-bold">Get In Touch</p>
-          <div className="flex flex-row flex-wrap gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             <Anchor
               href={`https://wa.me/${PHONE_NUMBER}`}
               className="hover:text-black hover:[&>svg]:fill-black"

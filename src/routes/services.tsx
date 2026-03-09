@@ -6,7 +6,7 @@ export const Route = createFileRoute("/services")({
 
 function RouteComponent() {
   return (
-    <div className="text-center text-2xl font-bold">
+    <div className="text-center text-2xl font-bold min-h-[70vh] grid place-items-center">
       SERVICES - In Development
     </div>
   );
