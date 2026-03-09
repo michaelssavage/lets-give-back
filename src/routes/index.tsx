@@ -2,7 +2,7 @@ import { buttonStyles } from "@/components/button/button.styles";
 import { Card } from "@/components/card";
 import { HeartIcon } from "@/components/icons/heart.icon";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, Handshake, Share2, Sprout } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
@@ -74,9 +74,20 @@ function App() {
             from addiction, and the elderly.
           </p>
 
-          <Link to="/contact" className={buttonStyles({ variant: "primary" })}>
-            Get in touch
-          </Link>
+          <div className="flex flex-row gap-4">
+            <Link
+              to="/contact"
+              className={buttonStyles({ variant: "primary" })}
+            >
+              Get in touch
+            </Link>
+            <Link
+              to="/projects"
+              className={buttonStyles({ variant: "outline" })}
+            >
+              See our projects
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -107,7 +118,7 @@ function App() {
           })}
         </div>
 
-        <Card className="relative z-10 my-12 md:my-24 mx-4 bg-light-orange">
+        <Card className="relative z-10 my-12 md:my-24 mx-6 bg-light-orange">
           <HeartIcon
             color="var(--color-primary-orange)"
             className="absolute -top-4 -right-4 size-12 md:size-16"
@@ -125,16 +136,17 @@ function App() {
             to="/services"
             className={buttonStyles({
               variant: "ghost",
-              className: "flex items-center gap-1 hover:[&_svg]:translate-x-1",
+              className:
+                "flex items-center gap-1 hover:[&_svg]:translate-x-1 text-nowrap text-lg md:text-xl",
             })}
           >
             View our services
-            <ArrowRightIcon className="size-6" />
+            <ArrowRightIcon className="size-6 shrink-0" />
           </Link>
         </Card>
       </section>
 
-      <section className="bg-light-blue p-12 min-h-[60vh] grid place-items-center">
+      <section className="bg-light-blue px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
         <h2 className="text-3xl md:text-4xl font-bold text-center">
           Who do we support?
         </h2>
@@ -148,6 +160,36 @@ function App() {
               {group}
             </p>
           ))}
+        </div>
+      </section>
+
+      <section className="relative bg-card px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div className="flex flex-row gap-2">
+              <Share2 className="size-8" />
+              <h2>Share</h2>
+            </div>
+            <p className="text-lg md:text-xl">Spread awareness of our work</p>
+          </div>
+
+          <div className="md:mt-20">
+            <div className="flex flex-row gap-2">
+              <Sprout className="size-8 text-primary-orange" />
+              <h2>Donate</h2>
+            </div>
+            <p className="text-lg md:text-xl">
+              Small contributions go a long way
+            </p>
+          </div>
+
+          <div>
+            <div className="flex flex-row gap-2">
+              <Handshake className="size-8" />
+              <h2>Volunteer</h2>
+            </div>
+            <p className="text-lg md:text-xl">Join us in making a difference</p>
+          </div>
         </div>
       </section>
     </div>

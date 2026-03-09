@@ -39,8 +39,8 @@ export const Footer = () => {
         </div>
 
         <div className="flex flex-col items-center mx-auto md:mx-0 md:items-start flex-wrap gap-2">
-          <p className="text-2xl font-bold">Get In Touch</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+          <p className="text-2xl font-bold mb-4 md:mb-0">Get In Touch</p>
+          <div className="flex flex-col md:flex-row flex-wrap gap-4">
             <Anchor
               href={`https://wa.me/${PHONE_NUMBER}`}
               className="hover:text-black hover:[&>svg]:fill-black"

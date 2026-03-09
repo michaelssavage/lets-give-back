@@ -6,7 +6,7 @@ export const Route = createFileRoute("/about")({
 
 function RouteComponent() {
   return (
-    <div className="text-center px-6 py-8 md:px-12">
+    <div className="text-center px-6 py-8 md:px-12 md:pb-16 max-w-5xl mx-auto">
       <h1>ABOUT US</h1>
       <p className="text-base md:text-lg text-balance">
         Let&apos;s Give Back CLG is a community-driven social enterprise founded
@@ -18,7 +18,7 @@ function RouteComponent() {
         teamwork, and pride, so that we can create visible change for those who
         need it most.
       </p>
-      <h2 className="mt-8">Teaching Life Skills Through Simple Jobs</h2>
+      <h2 className="mt-8 mb-4">Teaching Life Skills Through Simple Jobs</h2>
       <p className="text-base md:text-lg text-balance">
         Our work spans Community Renovation Projects, Skills &amp; Training
         Workshops, a Mobile Food &amp; Coffee Truck, Youth &amp; Inclusion
