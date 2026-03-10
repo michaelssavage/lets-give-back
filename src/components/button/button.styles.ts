@@ -2,7 +2,7 @@ import { cn } from "@/styles/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const base =
-  "font-semibold rounded-xl py-3 px-6 transition disabled:opacity-50 disabled:cursor-not-allowed active:scale-105";
+  "text-lg md:text-xl font-semibold rounded-xl py-2 md:py-3 px-4 md:px-6 transition disabled:opacity-50 disabled:cursor-not-allowed active:scale-105";
 
 const buttonCva = cva(base, {
   variants: {
@@ -13,7 +13,7 @@ const buttonCva = cva(base, {
         "bg-transparent text-dark-blue hover:bg-dark-blue hover:text-white border border-dark-blue",
       secondary: "bg-dark-blue text-white hover:bg-primary-blue",
       ghost:
-        "text-xl bg-transparent text-black hover:text-primary-orange hover:underline p-0",
+        "bg-transparent text-black hover:text-primary-orange hover:underline p-0",
     },
   },
   defaultVariants: {

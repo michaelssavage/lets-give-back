@@ -3,6 +3,7 @@
 @import "./reset.css";
 
 @theme {
+  --breakpoint-xs: 25rem; /* 400px */
   --font-dm-sans: "DM Sans", sans-serif;
   --font-hanneat: "Hanneat", sans-serif;
 

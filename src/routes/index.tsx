@@ -74,7 +74,7 @@ function App() {
             from addiction, and the elderly.
           </p>
 
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-col xs:flex-row gap-4 *:text-center">
             <Link
               to="/contact"
               className={buttonStyles({ variant: "primary" })}
@@ -164,10 +164,10 @@ function App() {
       </section>
 
       <section className="relative bg-card px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 [&_h2]:text-3xl md:[&_h2]:text-4xl lg:[&_h2]:text-5xl xl:[&_h2]:text-6xl">
           <div>
             <div className="flex flex-row gap-2">
-              <Share2 className="size-8" />
+              <Share2 className="size-8 md:size-10" />
               <h2>Share</h2>
             </div>
             <p className="text-lg md:text-xl">Spread awareness of our work</p>
@@ -175,7 +175,7 @@ function App() {
 
           <div className="md:mt-20">
             <div className="flex flex-row gap-2">
-              <Sprout className="size-8 text-primary-orange" />
+              <Sprout className="size-8 md:size-10 text-primary-orange" />
               <h2>Donate</h2>
             </div>
             <p className="text-lg md:text-xl">
@@ -185,7 +185,7 @@ function App() {
 
           <div>
             <div className="flex flex-row gap-2">
-              <Handshake className="size-8" />
+              <Handshake className="size-8 md:size-10" />
               <h2>Volunteer</h2>
             </div>
             <p className="text-lg md:text-xl">Join us in making a difference</p>
