@@ -17,6 +17,8 @@
   --color-dark-orange: oklch(0.5575 0.1954 37.35); /* cc3600 */
   --color-primary-orange: oklch(0.6598 0.1961 36.87); /* f1592a */
 
+  --color-primary-green: oklch(0.6298 0.23678 142.3924) /* 00a900 */;
+
   --color-light-blue: oklch(0.9142 0.0352 250.87) /* d2e5fa */;
   --color-light-green: oklch(0.9536 0.0308 137.82) /* e6f5e1 */;
   --color-light-orange: oklch(0.9001 0.0384 38.09) /* f6d6cc */;

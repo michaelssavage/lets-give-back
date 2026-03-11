@@ -5,6 +5,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRightIcon, Handshake, Share2, Sprout } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import toast from "react-hot-toast";
 
 export const Route = createFileRoute("/")({ component: App });
 
@@ -52,6 +53,28 @@ function App() {
     [0, 0.2],
     ["-4deg", "0deg"]
   );
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Let's Give Back",
+          text: "A community-focused organisation in Co. Monaghan, Ireland",
+          url: window.location.href,
+        });
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name !== "AbortError")
+          console.error(err);
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      toast.success("Link copied to clipboard!");
+    }
+  };
+
+  const handleDonate = async () => {
+    console.log("Donate");
+  };
 
   return (
     <div>
@@ -166,28 +189,43 @@ function App() {
       <section className="relative bg-card px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 [&_h2]:text-3xl md:[&_h2]:text-4xl lg:[&_h2]:text-5xl xl:[&_h2]:text-6xl">
           <div>
-            <div className="flex flex-row gap-2">
-              <Share2 className="size-8 md:size-10" />
-              <h2>Share</h2>
-            </div>
+            <button
+              className="group flex flex-row gap-2 cursor-pointer"
+              onClick={handleShare}
+            >
+              <Share2 className="size-8 md:size-10 group-hover:text-primary-orange" />
+              <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-orange">
+                Share
+              </h2>
+            </button>
             <p className="text-lg md:text-xl">Spread awareness of our work</p>
           </div>
 
           <div className="md:mt-20">
-            <div className="flex flex-row gap-2">
-              <Sprout className="size-8 md:size-10 text-primary-orange" />
-              <h2>Donate</h2>
-            </div>
+            <button
+              onClick={handleDonate}
+              className="group flex flex-row gap-2"
+            >
+              <Sprout className="size-8 md:size-10 text-primary-green" />
+              <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-green">
+                Donate
+              </h2>
+            </button>
             <p className="text-lg md:text-xl">
               Small contributions go a long way
             </p>
           </div>
 
           <div>
-            <div className="flex flex-row gap-2">
-              <Handshake className="size-8 md:size-10" />
-              <h2>Volunteer</h2>
-            </div>
+            <Link
+              to="/contact-us"
+              className="group flex flex-row gap-2 active:scale-105"
+            >
+              <Handshake className="size-8 md:size-10 group-hover:text-primary-orange" />
+              <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-orange">
+                Volunteer
+              </h2>
+            </Link>
             <p className="text-lg md:text-xl">Join us in making a difference</p>
           </div>
         </div>

@@ -1,17 +1,17 @@
+import { Footer } from "@/components/footer";
+import { Layout } from "@/components/layout";
+import { Navbar } from "@/components/navbar";
+import { NotFound } from "@/components/not-found";
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import type { QueryClient } from "@tanstack/react-query";
 import {
   HeadContent,
   Scripts,
   createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-
-import { Footer } from "@/components/footer";
-import { Layout } from "@/components/layout";
-import { Navbar } from "@/components/navbar";
-import { NotFound } from "@/components/not-found";
-import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 import appCss from "../styles/root.css?url";
 
 interface RootRouteContext {
@@ -77,6 +77,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <Layout>{children}</Layout>
         <Footer />
 
+        <Toaster />
         <TanStackDevtools
           config={{ position: "bottom-right" }}
           plugins={[

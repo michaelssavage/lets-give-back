@@ -8,16 +8,19 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import viteReact from "@vitejs/plugin-react";
 
-const config = defineConfig({
+export default defineConfig(({ mode }) => ({
   server: { port: 4000 },
   plugins: [
     devtools({ eventBusConfig: { port: 4001 } }),
     cloudflare({ viteEnvironment: { name: "ssr" } }),
     tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      router:
+        mode === "development"
+          ? { codeSplittingOptions: { defaultBehavior: [] } }
+          : undefined,
+    }),
     viteReact(),
   ],
-});
-
-export default config;
+}));

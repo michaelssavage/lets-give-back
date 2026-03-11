@@ -7,78 +7,95 @@ import {
   MONAGHAN_MAP_LINK,
   PHONE_NUMBER,
 } from "@/utils/constants";
-import { Mail, Phone } from "lucide-react";
+import { CopyIcon, Mail, MousePointerClick, Phone } from "lucide-react";
+import type { MouseEvent } from "react";
+import toast from "react-hot-toast";
 
 export const Footer = () => {
+  const copyEmail = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(EMAIL_ADDRESS);
+    toast.success("Email copied to clipboard");
+  };
+
   return (
-    <footer className="px-4 pt-8 pb-4 bg-primary-orange text-white">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8 mx-2 md:mx-8">
-        <div className="flex flex-col md:flex-row mx-auto md:mx-0 items-center gap-4">
+    <footer className="px-4 pt-10 pb-6 bg-primary-orange text-white">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-16 mb-8 mx-2 md:mx-8">
+        <div className="flex flex-col lg:flex-row mx-auto md:mx-0 items-center gap-4">
           <img
             src="/logo-orange.png"
             alt="Let's Give Back"
-            className="size-16 md:size-32 hover:rotate-12 transition-transform duration-200"
+            className="size-24 md:size-28 hover:rotate-12 transition-transform duration-200"
           />
 
           <div className="text-center md:text-left">
-            <p className="text-3xl md:text-4xl font-bold">
-              Let&apos;s Give Back CLG
+            <p className="text-3xl md:text-4xl font-bold flex flex-col">
+              <span className="whitespace-nowrap">Let&apos;s Give</span>
+              <span className="whitespace-nowrap">Back CLG</span>
             </p>
-            <p>
-              Based in{" "}
-              <Anchor
-                href={MONAGHAN_MAP_LINK}
-                isExternal
-                className="hover:text-black hover:[&>svg]:stroke-black inline-flex gap-1 items-baseline"
-              >
-                Co. Monaghan
-              </Anchor>
-              , Ireland.
+
+            <p className="whitespace-nowrap">
+              &copy; {new Date().getFullYear()} Let&apos;s Give Back
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-center mx-auto md:mx-0 md:items-start flex-wrap gap-2">
-          <p className="text-2xl font-bold mb-4 md:mb-0">Get In Touch</p>
-          <div className="flex flex-col md:flex-row flex-wrap gap-4">
-            <Anchor
-              href={`https://wa.me/${PHONE_NUMBER}`}
-              className="hover:text-black hover:[&>svg]:fill-black"
-              isExternal
+        <div className="grid grid-cols-1 md:grid-cols-[max-content_max-content] mx-auto md:mx-0 md:items-start flex-wrap gap-y-4 gap-x-8">
+          <Anchor href={FACEBOOK_URL} className="hover:underline" isExternal>
+            <FacebookIcon size={24} className="fill-white shrink-0" />
+            Facebook
+          </Anchor>
+
+          <Anchor
+            href={`mailto:${EMAIL_ADDRESS}`}
+            className="group hover:underline overflow-hidden"
+            isExternal
+          >
+            <Mail size={24} className="shrink-0" />
+            {EMAIL_ADDRESS}
+
+            <button
+              onClick={copyEmail}
+              title="Copy email to clipboard"
+              className="hidden group-hover:flex items-center no-underline hover:no-underline"
             >
-              <WhatsappIcon size={24} className="fill-white" />
-              WhatsApp
-            </Anchor>
-            <Anchor
-              href={`tel:${PHONE_NUMBER}`}
-              className="hover:text-black hover:[&>svg]:stroke-black"
-              isExternal
-            >
-              <Phone size={24} className="stroke-white" />
-              {PHONE_NUMBER}
-            </Anchor>
-            <Anchor
-              href={FACEBOOK_URL}
-              className="hover:text-black hover:[&>svg]:fill-black"
-              isExternal
-            >
-              <FacebookIcon size={24} className="fill-white" />
-              Facebook
-            </Anchor>
-            <Anchor
-              href={`mailto:${EMAIL_ADDRESS}`}
-              className="hover:text-black hover:[&>svg]:stroke-black"
-              isExternal
-            >
-              <Mail size={24} />
-              Email
-            </Anchor>
-          </div>
+              <CopyIcon className="size-6 shrink-0 stroke-light-orange" />
+              <MousePointerClick className="size-5 shrink-0 stroke-light-orange" />
+            </button>
+          </Anchor>
+
+          <Anchor
+            href={`https://wa.me/${PHONE_NUMBER}`}
+            className="hover:underline"
+            isExternal
+          >
+            <WhatsappIcon size={24} className="fill-white shrink-0" />
+            WhatsApp
+          </Anchor>
+
+          <Anchor
+            href={`tel:${PHONE_NUMBER}`}
+            className="hover:underline"
+            isExternal
+          >
+            <Phone size={24} className="stroke-white shrink-0" />
+            {PHONE_NUMBER.replace("+353 ", "0")}
+          </Anchor>
         </div>
       </div>
 
-      <p className="text-end">
-        &copy; {new Date().getFullYear()} Let&apos;s Give Back
+      <hr className="my-6" />
+
+      <p>
+        Based in{" "}
+        <Anchor
+          href={MONAGHAN_MAP_LINK}
+          isExternal
+          className="hover:text-black hover:[&>svg]:stroke-black inline-flex gap-1 items-baseline"
+        >
+          Co. Monaghan
+        </Anchor>
+        , Ireland.
       </p>
     </footer>
   );
