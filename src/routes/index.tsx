@@ -1,3 +1,4 @@
+import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { Card } from "@/components/card";
 import { HeartIcon } from "@/components/icons/heart.icon";
@@ -70,10 +71,6 @@ function App() {
       navigator.clipboard.writeText(window.location.href);
       toast.success("Link copied to clipboard!");
     }
-  };
-
-  const handleDonate = async () => {
-    console.log("Donate");
   };
 
   return (
@@ -202,15 +199,16 @@ function App() {
           </div>
 
           <div className="md:mt-20">
-            <button
-              onClick={handleDonate}
+            <Anchor
+              href="https://revolut.me/letsgiveback"
               className="group flex flex-row gap-2"
+              isExternal
             >
               <Sprout className="size-8 md:size-10 text-primary-green" />
               <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-green">
                 Donate
               </h2>
-            </button>
+            </Anchor>
             <p className="text-lg md:text-xl">
               Small contributions go a long way
             </p>

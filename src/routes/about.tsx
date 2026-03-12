@@ -1,4 +1,7 @@
 import { Anchor } from "@/components/anchor";
+import { buttonStyles } from "@/components/button/button.styles";
+import { RevolutIcon } from "@/components/icons/revolut.icon";
+import { REVOLUT_URL } from "@/utils/constants";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
@@ -40,6 +43,18 @@ function RouteComponent() {
         tools, and other materials are just as valuable to us, so if you have
         something sitting unused, we&apos;ll put it to good use!
       </p>
+
+      <Anchor
+        href={REVOLUT_URL}
+        className={buttonStyles({
+          variant: "primary",
+          className: "mt-8 w-fit",
+        })}
+        isExternal
+      >
+        <RevolutIcon size={24} className="fill-white shrink-0" />
+        Revolut
+      </Anchor>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import { Anchor } from "@/components/anchor";
 import { FacebookIcon } from "@/components/icons/facebook.icon";
+import { RevolutIcon } from "@/components/icons/revolut.icon";
 import { WhatsappIcon } from "@/components/icons/whatsapp.icon";
 import {
   EMAIL_ADDRESS,
   FACEBOOK_URL,
   MONAGHAN_MAP_LINK,
   PHONE_NUMBER,
+  PHONE_NUMBER_TWO,
+  REVOLUT_URL,
 } from "@/utils/constants";
 import { CopyIcon, Mail, MousePointerClick, Phone } from "lucide-react";
 import type { MouseEvent } from "react";
@@ -64,6 +67,20 @@ export const Footer = () => {
             </button>
           </Anchor>
 
+          <Anchor href={REVOLUT_URL} className="hover:underline" isExternal>
+            <RevolutIcon size={24} className="fill-white shrink-0" />
+            Revolut
+          </Anchor>
+
+          <Anchor
+            href={`tel:${PHONE_NUMBER}`}
+            className="hover:underline"
+            isExternal
+          >
+            <Phone size={24} className="stroke-white shrink-0" />
+            {PHONE_NUMBER.replace("+353 ", "0")}
+          </Anchor>
+
           <Anchor
             href={`https://wa.me/${PHONE_NUMBER}`}
             className="hover:underline"
@@ -74,12 +91,12 @@ export const Footer = () => {
           </Anchor>
 
           <Anchor
-            href={`tel:${PHONE_NUMBER}`}
+            href={`tel:${PHONE_NUMBER_TWO}`}
             className="hover:underline"
             isExternal
           >
             <Phone size={24} className="stroke-white shrink-0" />
-            {PHONE_NUMBER.replace("+353 ", "0")}
+            {PHONE_NUMBER_TWO.replace("+353 ", "0")}
           </Anchor>
         </div>
       </div>
