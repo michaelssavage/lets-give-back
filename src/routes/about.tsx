@@ -47,7 +47,7 @@ function RouteComponent() {
       <Anchor
         href={REVOLUT_URL}
         className={buttonStyles({
-          variant: "primary",
+          variant: "secondary",
           className: "mt-8 w-fit",
         })}
         isExternal

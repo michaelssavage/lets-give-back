@@ -81,7 +81,7 @@ function RouteComponent() {
           we&apos;ll get back to you. Or give us a text on{" "}
           <Anchor
             href="https://wa.me/353874376999"
-            className="hover:text-primary-orange inline-flex items-baseline"
+            className="underline decoration-primary-orange underline-offset-4 decoration-5 hover:text-primary-orange inline-flex items-baseline"
             isExternal
           >
             WhatsApp
@@ -90,7 +90,7 @@ function RouteComponent() {
           or call us at{" "}
           <Anchor
             href={`tel:${PHONE_NUMBER}`}
-            className="hover:text-primary-orange inline-flex items-baseline"
+            className="underline decoration-primary-orange underline-offset-4 decoration-5 hover:text-primary-orange inline-flex items-baseline"
             isExternal
           >
             {PHONE_NUMBER}
