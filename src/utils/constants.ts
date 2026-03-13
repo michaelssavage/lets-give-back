@@ -4,8 +4,6 @@ export const SITE_DESCRIPTION =
 
 export const PHONE_NUMBER = "+353 87 437 6999";
 
-export const PHONE_NUMBER_TWO = "+353 87 458 1279";
-
 export const EMAIL_ADDRESS = "letsgivebackmonaghan@gmail.com";
 
 export const FACEBOOK_URL =

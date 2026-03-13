@@ -7,7 +7,6 @@ import {
   FACEBOOK_URL,
   MONAGHAN_MAP_LINK,
   PHONE_NUMBER,
-  PHONE_NUMBER_TWO,
   REVOLUT_URL,
 } from "@/utils/constants";
 import { CopyIcon, Mail, MousePointerClick, Phone } from "lucide-react";
@@ -23,8 +22,8 @@ export const Footer = () => {
 
   return (
     <footer className="px-4 pt-10 pb-6 bg-primary-orange text-white">
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-16 mb-8 mx-2 md:mx-8">
-        <div className="flex flex-col lg:flex-row mx-auto md:mx-0 items-center gap-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-8 lg:gap-16 mb-8 mx-2 md:mx-8">
+        <div className="flex flex-col lg:flex-row flex-wrap mx-auto md:mx-0 items-center gap-4">
           <img
             src="/logo-orange.png"
             alt="Let's Give Back"
@@ -43,7 +42,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[max-content_max-content] mx-auto md:mx-0 md:items-start flex-wrap gap-y-4 gap-x-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[max-content_max-content] mx-auto md:mx-0 md:items-start flex-wrap gap-y-4 gap-x-8">
           <Anchor href={FACEBOOK_URL} className="hover:underline" isExternal>
             <FacebookIcon size={24} className="fill-white shrink-0" />
             Facebook
@@ -89,15 +88,15 @@ export const Footer = () => {
             <WhatsappIcon size={24} className="fill-white shrink-0" />
             WhatsApp
           </Anchor>
+        </div>
 
-          <Anchor
-            href={`tel:${PHONE_NUMBER_TWO}`}
-            className="hover:underline"
-            isExternal
-          >
-            <Phone size={24} className="stroke-white shrink-0" />
-            {PHONE_NUMBER_TWO.replace("+353 ", "0")}
-          </Anchor>
+        <div className="hidden md:flex flex-col justify-end items-end ml-auto">
+          <img
+            src="/qr-code.png"
+            alt="Revolut"
+            className="size-16 md:size-24 rounded-lg"
+          />
+          <p className="text-sm text-white whitespace-nowrap">Scan to donate</p>
         </div>
       </div>
 
