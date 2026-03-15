@@ -4,7 +4,12 @@
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
-  "observability": {
-    "enabled": true
-  }
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "auth",
+      "database_id": "b88546e1-d5ef-4c38-9624-39af1f95e524",
+    },
+  ],
 }

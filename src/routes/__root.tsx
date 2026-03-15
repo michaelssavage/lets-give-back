@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer";
 import { Layout } from "@/components/layout";
 import { Navbar } from "@/components/navbar";
 import { NotFound } from "@/components/not-found";
+import { getCurrentUserFn } from "@/routes/_auth";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import {
@@ -19,6 +20,10 @@ interface RootRouteContext {
 }
 
 export const Route = createRootRouteWithContext<RootRouteContext>()({
+  beforeLoad: async () => {
+    const { user } = await getCurrentUserFn();
+    return { user };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },

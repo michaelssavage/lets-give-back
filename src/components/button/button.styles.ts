@@ -16,7 +16,7 @@ const buttonCva = cva(base, {
         "bg-transparent text-black hover:text-primary-orange hover:underline p-0",
     },
     size: {
-      sm: "text-sm md:text-base",
+      sm: "text-sm md:text-base py-1 px-2 md:py-2 md:px-4 [&_svg]:size-4 md:[&_svg]:size-5",
       md: "text-lg md:text-xl",
       lg: "text-xl md:text-2xl",
     },

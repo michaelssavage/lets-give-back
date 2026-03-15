@@ -1,6 +1,5 @@
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
-import { Card } from "@/components/card";
 import { HeartIcon } from "@/components/icons/heart.icon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRightIcon, Handshake, Share2, Sprout } from "lucide-react";
@@ -138,7 +137,7 @@ function App() {
           })}
         </div>
 
-        <Card className="relative z-10 my-12 md:my-24 mx-6 bg-light-orange">
+        <div className="card-shadow flex flex-col items-center justify-center gap-4 max-w-3xl rounded-2xl p-6 md:p-12 border relative z-10 my-12 md:my-24 mx-6 bg-light-orange">
           <HeartIcon
             color="var(--color-primary-orange)"
             className="absolute -top-4 -right-4 size-12 md:size-16"
@@ -163,7 +162,7 @@ function App() {
             View our services
             <ArrowRightIcon className="size-6 shrink-0" />
           </Link>
-        </Card>
+        </div>
       </section>
 
       <section className="bg-light-blue px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
