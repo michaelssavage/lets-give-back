@@ -136,7 +136,7 @@ export const Footer = () => {
         </p>
 
         <Anchor
-          href="https://michaelsavage.dev"
+          href="https://michaelsavage.ie"
           className="hover:text-black"
           isExternal
         >
