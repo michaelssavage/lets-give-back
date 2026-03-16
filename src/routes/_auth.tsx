@@ -63,13 +63,13 @@ export const logoutFn = createServerFn({ method: "POST" }).handler(async () => {
   return { success: true };
 });
 
-function AuthLayout() {
-  return <Outlet />;
-}
-
 export const Route = createFileRoute("/_auth")({
   component: AuthLayout,
   loader: async () => {
     return null;
   },
 });
+
+function AuthLayout() {
+  return <Outlet />;
+}

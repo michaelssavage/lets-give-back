@@ -5,7 +5,7 @@ import { Card } from "@/components/card";
 import { FacebookIcon } from "@/components/icons/facebook.icon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/projects")({
+export const Route = createFileRoute("/projects/")({
   component: RouteComponent,
 });
 

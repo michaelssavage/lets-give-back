@@ -61,6 +61,8 @@ export const Navbar = () => {
           <img
             src="/logo-transparent.png"
             alt="Let's Give Back"
+            width={128}
+            height={128}
             className="size-16 md:size-32"
           />
         </Link>

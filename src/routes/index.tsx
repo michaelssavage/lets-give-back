@@ -1,6 +1,6 @@
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
-import { HeartIcon } from "@/components/icons/heart.icon";
+import { Fireworks } from "@/components/fireworks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRightIcon, Handshake, Share2, Sprout } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -51,7 +51,7 @@ function App() {
   const badgeRotate = useTransform(
     scrollYProgress,
     [0, 0.2],
-    ["-4deg", "0deg"]
+    ["-4deg", "0deg"],
   );
 
   const handleShare = async () => {
@@ -138,10 +138,9 @@ function App() {
         </div>
 
         <div className="card-shadow flex flex-col items-center justify-center gap-4 max-w-3xl rounded-2xl p-6 md:p-12 border relative z-10 my-12 md:my-24 mx-6 bg-light-orange">
-          <HeartIcon
-            color="var(--color-primary-orange)"
-            className="absolute -top-4 -right-4 size-12 md:size-16"
-          />
+          <div className="absolute -top-4 -right-4">
+            <Fireworks />
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-center">
             Building Skills, Building Community
           </h2>
@@ -174,7 +173,7 @@ function App() {
           {SUPPORTED_GROUPS.map((group) => (
             <p
               key={group}
-              className="grid place-items-center text-2xl card-shadow rounded-2xl py-4 px-6 bg-white font-bold text-center"
+              className="grid place-items-center text-2xl card-shadow rounded-2xl py-4 px-6 bg-white font-bold text-center hover:-rotate-2 transition-transform duration-200"
             >
               {group}
             </p>

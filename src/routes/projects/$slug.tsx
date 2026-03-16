@@ -5,7 +5,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "lucide-react";
 import Markdown from "react-markdown";
 
-export const Route = createFileRoute("/projects_/$slug")({
+export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
     const project = PROJECTS.find((p) => p.slug === params.slug);
     if (!project) throw notFound();

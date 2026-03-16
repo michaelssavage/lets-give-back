@@ -130,9 +130,8 @@ export const Footer = () => {
             isExternal
             className="hover:text-black hover:[&>svg]:stroke-black inline-flex gap-1 items-baseline"
           >
-            Co. Monaghan
+            Co. Monaghan, Ireland.
           </Anchor>
-          , Ireland.
         </p>
 
         <Anchor
