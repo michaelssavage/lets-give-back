@@ -1,5 +1,5 @@
 import { Button } from "@/components/button/button";
-import { TextInput } from "@/components/form/TextInput";
+import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
 import { useState } from "react";
 
@@ -14,11 +14,7 @@ export const CreateProject = () => {
     <Modal
       title="Create Project"
       description="Create a new project"
-      trigger={
-        <Button size="sm" variant="outline">
-          Create Project
-        </Button>
-      }
+      trigger="Create"
     >
       <div className="flex flex-col gap-4 my-4">
         <TextInput

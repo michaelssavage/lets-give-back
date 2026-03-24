@@ -1,10 +1,13 @@
+import { toParagraphDoc } from "@/components/tiptap/tiptap-utils";
+import type { JSONContent } from "@tiptap/core";
+
 export interface Project {
   id: string;
   date: string;
   slug: string;
   title: string;
   subtitle: string;
-  description: string;
+  description: JSONContent;
   image: string;
   facebook: string;
   gallery?: Array<string>;
@@ -17,7 +20,9 @@ export const PROJECTS: Array<Project> = [
     date: "6 November 2025",
     title: "Belturbet - 'Bounce Back' Youth Project",
     subtitle: "Rejuvenating an outdoor area by a waterfront",
-    description: `The young people at Bounce Back Youth Club in Belturbet took on the challenge of rejuvenating their outdoor area by the waterfront — and delivered outstanding results.\n\nWith guidance and support from Let's Give Back, the group worked together to clean, repair, and refresh the space, creating a welcoming spot for the wider community to enjoy. Their teamwork, creativity, and pride in giving something back were genuinely inspiring to witness.\n\nA special thank-you went to Peter Cunningham and the team at Newtricity Clones, Monaghan, who donated the recycled timber used to build the new furniture. Their contribution made a real and visible difference to the finished space.\n\nThe project was made possible through funding from the CMETB, without whose support initiatives like this simply would not get off the ground.\n\n*Together we're Building Skills, Building Community.*`,
+    description: toParagraphDoc(
+      `The young people at Bounce Back Youth Club in Belturbet took on the challenge of rejuvenating their outdoor area by the waterfront — and delivered outstanding results.\n\nWith guidance and support from Let's Give Back, the group worked together to clean, repair, and refresh the space, creating a welcoming spot for the wider community to enjoy. Their teamwork, creativity, and pride in giving something back were genuinely inspiring to witness.\n\nA special thank-you went to Peter Cunningham and the team at Newtricity Clones, Monaghan, who donated the recycled timber used to build the new furniture. Their contribution made a real and visible difference to the finished space.\n\nThe project was made possible through funding from the CMETB, without whose support initiatives like this simply would not get off the ground.\n\n*Together we're Building Skills, Building Community.*`,
+    ),
     image: "/projects/round-bench.jpg",
     facebook:
       "https://www.facebook.com/permalink.php?story_fbid=122156192720785276&id=61573558281380&ref=embed_post",
@@ -29,7 +34,9 @@ export const PROJECTS: Array<Project> = [
     slug: "food-truck-renovation",
     title: "Food Truck Renovation",
     subtitle: "Preparing our community food truck",
-    description: `In November 2025, the Let's Give Back community food truck entered Phase 1 of its renovation. This first stage focused on stripping, cleaning, and preparing the interior for a full fit-out, with the goal of turning it into a mobile coffee and food unit.\n\nOnce completed, the truck was intended to help fundraise for local projects, engage young people in hands-on learning, and bring communities together through events and pop-ups.\n\nA sincere thank-you was owed to SICAP at Monaghan Integrated Development for providing the start-up grant that allowed the project to begin. Their support made the first phase possible and moved the idea significantly closer to becoming a working community resource.\n\nPhase 2 brought the project to life. Appliances were installed, the final touches were completed, and the truck was wrapped in full Let's Give Back style. The build was carried out with real care and professionalism — Eamon Treanor Engineering handled the construction work throughout, and Marc McMeel delivered clean, tidy electrical work from start to finish.\n\nThe truck was never just about food. It was about funding youth projects, creating opportunities, and building skills while building community.\n\n*The hatch opened — and the work continued.*`,
+    description: toParagraphDoc(
+      `In November 2025, the Let's Give Back community food truck entered Phase 1 of its renovation. This first stage focused on stripping, cleaning, and preparing the interior for a full fit-out, with the goal of turning it into a mobile coffee and food unit.\n\nOnce completed, the truck was intended to help fundraise for local projects, engage young people in hands-on learning, and bring communities together through events and pop-ups.\n\nA sincere thank-you was owed to SICAP at Monaghan Integrated Development for providing the start-up grant that allowed the project to begin. Their support made the first phase possible and moved the idea significantly closer to becoming a working community resource.\n\nPhase 2 brought the project to life. Appliances were installed, the final touches were completed, and the truck was wrapped in full Let's Give Back style. The build was carried out with real care and professionalism — Eamon Treanor Engineering handled the construction work throughout, and Marc McMeel delivered clean, tidy electrical work from start to finish.\n\nThe truck was never just about food. It was about funding youth projects, creating opportunities, and building skills while building community.\n\n*The hatch opened — and the work continued.*`,
+    ),
     image: "/projects/food-truck.jpg",
     facebook:
       "https://www.facebook.com/permalink.php?story_fbid=122170466324785276&id=61573558281380&ref=embed_post",
@@ -42,7 +49,9 @@ export const PROJECTS: Array<Project> = [
     title: "Outdoor Space at Breifne College",
     subtitle:
       "Transforming an unused outdoor area into a practical and welcoming space for a school",
-    description: `Over several weeks, Let's Give Back worked alongside students and teachers from Breifne College to transform an unused outdoor area into a practical and welcoming space for the school.\n\nStudents were involved at every stage of the process. They helped prepare the ground, move and level stone, learn how to use tools safely, and build the main features of the space with guidance from staff and the Let's Give Back team.\n\n**Phase One included:**\n\n- Ground preparation\n- Laying and levelling a stone surface\n- Building four raised garden beds\n- Constructing handmade benches\n- Creating a clean and safe foundation for the next stage\n\nThe phase was completed through strong teamwork and gave students the opportunity to develop practical skills and confidence while working together toward a shared goal.\n\nThanks were extended to the students of Breifne College for their hard work, to CMETB for funding support, to the Cavan School Completion Programme for their organisation and involvement, and to the staff of Breifne College for their support throughout.\n\nPhase Two focused on developing the centre area into a games and activity space for the school.`,
+    description: toParagraphDoc(
+      `Over several weeks, Let's Give Back worked alongside students and teachers from Breifne College to transform an unused outdoor area into a practical and welcoming space for the school.\n\nStudents were involved at every stage of the process. They helped prepare the ground, move and level stone, learn how to use tools safely, and build the main features of the space with guidance from staff and the Let's Give Back team.\n\n**Phase One included:**\n\n- Ground preparation\n- Laying and levelling a stone surface\n- Building four raised garden beds\n- Constructing handmade benches\n- Creating a clean and safe foundation for the next stage\n\nThe phase was completed through strong teamwork and gave students the opportunity to develop practical skills and confidence while working together toward a shared goal.\n\nThanks were extended to the students of Breifne College for their hard work, to CMETB for funding support, to the Cavan School Completion Programme for their organisation and involvement, and to the staff of Breifne College for their support throughout.\n\nPhase Two focused on developing the centre area into a games and activity space for the school.`,
+    ),
     image: "/projects/benches.jpg",
     facebook:
       "https://www.facebook.com/permalink.php?story_fbid=122157391004785276&id=61573558281380&ref=embed_post",
@@ -53,7 +62,9 @@ export const PROJECTS: Array<Project> = [
     slug: "canopy-bench-raffle",
     title: "Canopy Bench Raffle",
     subtitle: "Handmade canopy bench raffle to support community projects",
-    description: `In early 2026, Let's Give Back ran a raffle to support its social mission and community projects. The prize was a handmade canopy bench, constructed as part of a youth-led initiative. Entries were priced at €2 each, or €10 for ten, and participants entered by engaging with the post on Facebook and sending a Revolut payment with their name and number.\n\nThe winner was announced live on Facebook on 4 February 2026. Funds raised went directly towards supporting a group of young people in transforming an overgrown outdoor area into a recreational and gaming space. The project included a football pool, retro arcade-style games, and a range of skill, accuracy, balance, and coordination activities — building on the foundations laid during Phase 1, which had been supported by Breifne College, the Cavan School Completion Programme, and Alan Ryan, Creative Youth Coordinator at CMETB.\n\nStephanie and the team at Ardaghey Childcare Centre were the lucky winners of the canopy picnic bench. Delivering it was a pleasure. It was already in use when it arrived, with smiles all around. The bench became more than timber and screws — it provided a space for children to sit, talk, eat, learn, and make lasting memories.\n\nEvery ticket sold, every share, and every word of support went directly into building projects that benefit the community while giving young people real-world skills.`,
+    description: toParagraphDoc(
+      `In early 2026, Let's Give Back ran a raffle to support its social mission and community projects. The prize was a handmade canopy bench, constructed as part of a youth-led initiative. Entries were priced at €2 each, or €10 for ten, and participants entered by engaging with the post on Facebook and sending a Revolut payment with their name and number.\n\nThe winner was announced live on Facebook on 4 February 2026. Funds raised went directly towards supporting a group of young people in transforming an overgrown outdoor area into a recreational and gaming space. The project included a football pool, retro arcade-style games, and a range of skill, accuracy, balance, and coordination activities — building on the foundations laid during Phase 1, which had been supported by Breifne College, the Cavan School Completion Programme, and Alan Ryan, Creative Youth Coordinator at CMETB.\n\nStephanie and the team at Ardaghey Childcare Centre were the lucky winners of the canopy picnic bench. Delivering it was a pleasure. It was already in use when it arrived, with smiles all around. The bench became more than timber and screws — it provided a space for children to sit, talk, eat, learn, and make lasting memories.\n\nEvery ticket sold, every share, and every word of support went directly into building projects that benefit the community while giving young people real-world skills.`,
+    ),
     image: "/projects/picnic-bench.jpg",
     facebook:
       "https://www.facebook.com/permalink.php?story_fbid=122168126774785276&id=61573558281380&ref=embed_post",
@@ -66,7 +77,9 @@ export const PROJECTS: Array<Project> = [
     title: "Learning simple DIY tasks",
     subtitle:
       "Guided involvement can turn everyday tasks into meaningful learning experiences",
-    description: `A recent Let's Give Back project involved a series of small home tasks — putting up curtain poles, shelving, and a TV wall mount. What made the experience meaningful was that the young man involved did most of the work himself.\n\nRather than simply completing the jobs, the focus was on showing him how to measure, drill, and fix each item properly. Those few straightforward DIY tasks became an opportunity for him to build practical skills and genuine confidence. Not every young person gets the chance to work through something like this hands-on, with someone alongside them to guide rather than take over.\n\nThe goal was never just to finish the job. It was about teaching skills, building confidence, and showing young people that they were capable of doing things themselves.\n\nFor anyone with small jobs around the house — hanging blinds or curtains, putting up shelves, mounting a TV, or minor fixes — this kind of guided involvement can turn an ordinary afternoon into a meaningful learning experience.`,
+    description: toParagraphDoc(
+      `A recent Let's Give Back project involved a series of small home tasks — putting up curtain poles, shelving, and a TV wall mount. What made the experience meaningful was that the young man involved did most of the work himself.\n\nRather than simply completing the jobs, the focus was on showing him how to measure, drill, and fix each item properly. Those few straightforward DIY tasks became an opportunity for him to build practical skills and genuine confidence. Not every young person gets the chance to work through something like this hands-on, with someone alongside them to guide rather than take over.\n\nThe goal was never just to finish the job. It was about teaching skills, building confidence, and showing young people that they were capable of doing things themselves.\n\nFor anyone with small jobs around the house — hanging blinds or curtains, putting up shelves, mounting a TV, or minor fixes — this kind of guided involvement can turn an ordinary afternoon into a meaningful learning experience.`,
+    ),
     image: "/projects/drilling.jpg",
     facebook:
       "https://www.facebook.com/permalink.php?story_fbid=122171470316785276&id=61573558281380&ref=embed_post",
@@ -77,7 +90,9 @@ export const PROJECTS: Array<Project> = [
     slug: "commercial-truck-transformation",
     title: "Commercial Truck Transformation",
     subtitle: "Handmade canopy bench raffle to support community projects",
-    description: `Work began on converting a former commercial delivery truck into a dual-purpose community vehicle, and it took shape quickly from the outset.\n\nThe old wrapping was removed, the bodywork cleaned down, and the truck was prepared for its new design and purpose. Large enough to tow the Let's Give Back food truck, it added a new level of flexibility for future community events and projects.\n\nOne side was fitted out for tool and materials storage to support community builds, while the other incorporated refrigerated space for food outreach and events. Existing shelving was reused throughout to limit material usage and reduce waste.\n\nThe project brought together upcycling, sustainability, and purpose — taking something once retired and turning it into something that gives back.\n\n*Building Skills, Building Community.*`,
+    description: toParagraphDoc(
+      `Work began on converting a former commercial delivery truck into a dual-purpose community vehicle, and it took shape quickly from the outset.\n\nThe old wrapping was removed, the bodywork cleaned down, and the truck was prepared for its new design and purpose. Large enough to tow the Let's Give Back food truck, it added a new level of flexibility for future community events and projects.\n\nOne side was fitted out for tool and materials storage to support community builds, while the other incorporated refrigerated space for food outreach and events. Existing shelving was reused throughout to limit material usage and reduce waste.\n\nThe project brought together upcycling, sustainability, and purpose — taking something once retired and turning it into something that gives back.\n\n*Building Skills, Building Community.*`,
+    ),
     image: "/projects/truck-interior.jpg",
     facebook:
       "https://www.facebook.com/permalink.php?story_fbid=122156426654785276&id=61573558281380&ref=embed_post",

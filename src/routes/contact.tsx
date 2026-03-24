@@ -4,8 +4,8 @@ import {
   type ContactFormData,
 } from "@/api/send-email.api";
 import { Anchor } from "@/components/anchor";
-import { PhoneInput } from "@/components/form/PhoneInput";
-import { TextInput } from "@/components/form/TextInput";
+import { PhoneInput } from "@/components/form/phone-input";
+import { TextInput } from "@/components/form/text-input";
 import { PHONE_NUMBER } from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";

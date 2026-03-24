@@ -24,6 +24,7 @@ export default defineConfig([
       "react/prop-types": "off",
       "no-undef": "off",
       "no-unused-vars": "off",
+      "react-hooks/set-state-in-effect": "warn",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {

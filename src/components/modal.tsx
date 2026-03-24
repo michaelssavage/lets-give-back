@@ -8,13 +8,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/base/dialog";
+import { buttonStyles } from "@/components/button/button.styles";
 import type { ReactNode } from "react";
 
 interface ModalProps {
-  trigger: ReactNode;
+  trigger: string;
   title: string;
   description: string;
   children: ReactNode;
+  className?: string;
 }
 
 export const Modal = ({
@@ -22,14 +24,19 @@ export const Modal = ({
   title,
   description,
   children,
+  className,
 }: ModalProps) => {
   return (
     <Dialog>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <DialogTrigger
+        className={buttonStyles({ variant: "outline", size: "sm" })}
+      >
+        {trigger}
+      </DialogTrigger>
 
       <DialogPortal>
         <DialogBackdrop />
-        <DialogPopup>
+        <DialogPopup className={className}>
           <div className="flex justify-between items-center gap-4">
             <DialogTitle className="text-xl font-medium">{title}</DialogTitle>
             <DialogClose />

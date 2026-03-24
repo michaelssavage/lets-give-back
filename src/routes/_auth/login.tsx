@@ -1,5 +1,5 @@
 import { Button } from "@/components/button/button";
-import { TextInput } from "@/components/form/TextInput";
+import { TextInput } from "@/components/form/text-input";
 import { loginFn, type LoginFormData } from "@/routes/_auth";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";

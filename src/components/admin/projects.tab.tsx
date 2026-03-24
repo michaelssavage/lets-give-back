@@ -15,7 +15,7 @@ export const ProjectsTab = () => {
 
   return (
     <section className="w-full mt-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
         <h2>Projects</h2>
 
         <div className="flex items-center gap-2">
@@ -39,23 +39,14 @@ export const ProjectsTab = () => {
                   className="flex items-center gap-2"
                 >
                   <DragHandle {...dragHandleProps} />
-                  <div className="border bg-white border-secondary p-4 rounded-lg flex-1 flex items-center justify-between">
+                  <div className="border bg-white border-secondary p-4 rounded-lg flex-1 flex flex-col sm:flex-row items-center justify-between">
                     <div className="flex flex-col gap-1">
                       <p className="text-lg font-bold">{project.title}</p>
                       <p>{project.subtitle}</p>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="hover:bg-primary-blue"
-                      >
-                        Edit
-                      </Button>
-
+                    <div className="flex sm:items-center gap-2 w-full sm:w-fit justify-between sm:justify-end mt-2 sm:mt-0">
                       <EditProject project={project} />
-
                       <DeleteProject />
                     </div>
                   </div>

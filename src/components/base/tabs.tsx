@@ -12,7 +12,7 @@ export const TabsList = (
 ) => {
   return (
     <TabsBase.List
-      className="relative z-0 flex gap-1 px-1 text-white bg-light-orange rounded-lg"
+      className="relative z-0 flex px-1 text-white bg-gray-50 rounded-lg"
       {...props}
     >
       <TabsBase.Indicator
@@ -32,9 +32,9 @@ export const TabHeader = (props: React.ComponentProps<typeof TabsBase.Tab>) => {
     <TabsBase.Tab
       {...props}
       className={cn(
-        "flex items-center justify-center border-0 px-3 py-2 text-xl font-medium break-keep whitespace-nowrap text-secondary",
+        "flex items-center justify-center border-0 px-3 py-2 m-1 rounded-[calc(var(--radius-lg)-1px)] text-xl font-medium break-keep whitespace-nowrap text-secondary",
         "outline-hidden select-none before:inset-x-0 before:inset-y-1 before:rounded-xs before:-outline-offset-1 before:outline-primary-blue",
-        "hover:text-black decoration-primary-orange data-active:underline data-active:text-primary-orange focus-visible:relative focus-visible:before:absolute focus-visible:before:outline",
+        "hover:text-black decoration-primary-orange data-active:bg-dark-blue data-active:text-white focus-visible:relative focus-visible:before:absolute focus-visible:before:outline",
         props.className,
       )}
     />

@@ -8,7 +8,8 @@ interface ButtonProps {
   disabled?: boolean;
   className?: string;
   variant?: "primary" | "secondary" | "outline";
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
+  title?: string;
 }
 
 export const Button = ({
@@ -18,6 +19,7 @@ export const Button = ({
   variant = "primary",
   size = "md",
   disabled,
+  title,
   onClick,
 }: ButtonProps) => {
   return (
@@ -26,6 +28,7 @@ export const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      title={title}
     >
       {children}
     </button>

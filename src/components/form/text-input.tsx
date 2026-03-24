@@ -1,6 +1,6 @@
 import { baseInputStyles } from "@/components/form/base.styles";
 import { cn } from "@/styles/utils";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, KeyboardEvent } from "react";
 
 interface TextInputProps {
   id: string;
@@ -9,6 +9,9 @@ interface TextInputProps {
   placeholder: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onKeyDown?: (
+    e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   required?: boolean;
   type?: "text" | "email" | "password" | "textarea";
   error?: string | null;
@@ -22,6 +25,7 @@ export const TextInput = ({
   value,
   placeholder,
   onChange,
+  onKeyDown,
   type = "text",
   required = false,
   error,
@@ -40,6 +44,7 @@ export const TextInput = ({
           required={required}
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           aria-describedby={error ? `${id}-error` : undefined}
           aria-invalid={!!error}
           className={cn(baseInputStyles, "min-h-[120px] resize-y", className)}
@@ -53,6 +58,7 @@ export const TextInput = ({
           placeholder={placeholder}
           required={required}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           aria-describedby={error ? `${id}-error` : undefined}
           aria-invalid={!!error}
           className={cn(baseInputStyles, className)}

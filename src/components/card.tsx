@@ -35,7 +35,7 @@ export const Card = ({
       </div>
       <div className="p-4 flex flex-col gap-1">
         <h2 className="text-lg md:text-xl font-bold">{title}</h2>
-        <p className="text-sm text-muted-foreground">{subtitle}</p>
+        <p className="text-sm text-secondary">{subtitle}</p>
       </div>
     </div>
   );
