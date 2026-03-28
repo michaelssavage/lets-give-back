@@ -1,4 +1,5 @@
 import type { Project } from "@/api/projects.static";
+import { ImageUpload } from "@/components/admin/image-upload";
 import { Button } from "@/components/button/button";
 import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
@@ -66,13 +67,10 @@ export const EditProject = ({ project }: { project: Project }) => {
           />
         </div>
 
-        <TextInput
-          id="image"
-          label="Image URL"
-          name="image"
-          placeholder="Enter Image URL"
-          value={project.image}
-          onChange={(e) => handleEditField("image", e.target.value)}
+        <ImageUpload
+          currentUrl={editedProject.image}
+          folder="projects"
+          onUpload={(url) => handleEditField("image", url)}
         />
 
         {/* <TextInput

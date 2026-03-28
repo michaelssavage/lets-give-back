@@ -18,6 +18,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
+import { Route as ApiMediaRouteImport } from './routes/api/media'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 
 const ServicesRoute = ServicesRouteImport.update({
@@ -64,6 +65,11 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/projects/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiMediaRoute = ApiMediaRouteImport.update({
+  id: '/api/media',
+  path: '/api/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/contact-us': typeof ContactUsRoute
   '/services': typeof ServicesRoute
   '/login': typeof AuthLoginRoute
+  '/api/media': typeof ApiMediaRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
 }
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/contact-us': typeof ContactUsRoute
   '/services': typeof ServicesRoute
   '/login': typeof AuthLoginRoute
+  '/api/media': typeof ApiMediaRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects': typeof ProjectsIndexRoute
 }
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/contact-us': typeof ContactUsRoute
   '/services': typeof ServicesRoute
   '/_auth/login': typeof AuthLoginRoute
+  '/api/media': typeof ApiMediaRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
 }
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/services'
     | '/login'
+    | '/api/media'
     | '/projects/$slug'
     | '/projects/'
   fileRoutesByTo: FileRoutesByTo
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/services'
     | '/login'
+    | '/api/media'
     | '/projects/$slug'
     | '/projects'
   id:
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/services'
     | '/_auth/login'
+    | '/api/media'
     | '/projects/$slug'
     | '/projects/'
   fileRoutesById: FileRoutesById
@@ -150,6 +162,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ContactUsRoute: typeof ContactUsRoute
   ServicesRoute: typeof ServicesRoute
+  ApiMediaRoute: typeof ApiMediaRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/media': {
+      id: '/api/media'
+      path: '/api/media'
+      fullPath: '/api/media'
+      preLoaderRoute: typeof ApiMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
@@ -247,6 +267,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ContactUsRoute: ContactUsRoute,
   ServicesRoute: ServicesRoute,
+  ApiMediaRoute: ApiMediaRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }

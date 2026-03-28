@@ -12,4 +12,10 @@
       "database_id": "b88546e1-d5ef-4c38-9624-39af1f95e524",
     },
   ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "media",
+    },
+  ],
 }

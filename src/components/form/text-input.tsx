@@ -4,10 +4,11 @@ import type { ChangeEvent, KeyboardEvent } from "react";
 
 interface TextInputProps {
   id: string;
-  label: string;
+  label?: string;
   name: string;
   placeholder: string;
   value: string;
+  disabled?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onKeyDown?: (
     e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -23,6 +24,7 @@ export const TextInput = ({
   label,
   name,
   value,
+  disabled,
   placeholder,
   onChange,
   onKeyDown,
@@ -33,9 +35,11 @@ export const TextInput = ({
 }: TextInputProps) => {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm font-medium text-secondary">
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
+      {label && (
+        <label htmlFor={id} className="text-sm font-medium text-secondary">
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
       {type === "textarea" ? (
         <textarea
           id={id}
@@ -48,6 +52,7 @@ export const TextInput = ({
           aria-describedby={error ? `${id}-error` : undefined}
           aria-invalid={!!error}
           className={cn(baseInputStyles, "min-h-[120px] resize-y", className)}
+          disabled={disabled}
         />
       ) : (
         <input
@@ -63,6 +68,7 @@ export const TextInput = ({
           aria-invalid={!!error}
           className={cn(baseInputStyles, className)}
           autoComplete="on"
+          disabled={disabled}
         />
       )}
       {error && (

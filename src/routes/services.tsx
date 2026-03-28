@@ -1,7 +1,7 @@
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { RevolutIcon } from "@/components/icons/revolut.icon";
-import { REVOLUT_URL } from "@/utils/constants";
+import { MEDIA_URL, REVOLUT_URL } from "@/utils/constants";
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
 
@@ -44,7 +44,7 @@ function RouteComponent() {
         {/* 1. */}
         <div className="order-1 md:col-span-2 rounded-2xl overflow-hidden h-full">
           <img
-            src="/services/banner.jpg"
+            src={`${MEDIA_URL}/services/banner.jpg`}
             alt="Banner"
             className="w-full h-full object-cover"
           />
@@ -71,7 +71,7 @@ function RouteComponent() {
         {/* 4. */}
         <div className="order-3 md:order-4 md:col-span-2 rounded-2xl overflow-hidden h-full">
           <img
-            src="/services/earth.jpg"
+            src={`${MEDIA_URL}/services/earth.jpg`}
             alt="Earth"
             className="w-full h-full object-cover"
           />
@@ -80,7 +80,7 @@ function RouteComponent() {
         {/* 5. */}
         <div className="order-5 md:col-span-2 rounded-2xl overflow-hidden h-full">
           <img
-            src="/services/door.jpg"
+            src={`${MEDIA_URL}/services/door.jpg`}
             alt="Door"
             className="w-full h-full object-cover"
           />
