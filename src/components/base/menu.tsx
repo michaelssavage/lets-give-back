@@ -23,7 +23,7 @@ export const MenuTrigger = ({
     <MenuBase.Trigger
       openOnHover={openOnHover}
       className={cn(
-        "flex items-center justify-center gap-1.5 rounded-xl border border-dark-blue bg-gray-50 px-3.5 text-base font-medium text-gray-900 select-none focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 active:bg-gray-100 data-popup-open:text-black data-popup-open:bg-gray-100",
+        "flex items-center justify-center gap-1 rounded-xl border border-dark-blue bg-gray-50 px-3.5 text-base font-medium text-gray-900 select-none focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 active:bg-gray-100 data-popup-open:text-black data-popup-open:bg-gray-100",
         className,
       )}
       {...props}

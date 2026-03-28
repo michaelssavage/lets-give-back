@@ -1,3 +1,4 @@
+import { getProjectsFn } from "@/api/projects.api";
 import { ProjectsTab } from "@/components/admin/projects.tab";
 import { TabHeader, Tabs, TabsList, TabsPanel } from "@/components/base/tabs";
 import { createFileRoute, redirect } from "@tanstack/react-router";
@@ -8,11 +9,13 @@ export const Route = createFileRoute("/admin")({
       throw redirect({ to: "/login" });
     }
   },
+  loader: () => getProjectsFn(),
   component: AdminPage,
 });
 
 function AdminPage() {
   const { user } = Route.useRouteContext();
+  const projects = Route.useLoaderData();
 
   return (
     <section className="px-6 py-8 md:px-12 mx-12">
@@ -28,7 +31,7 @@ function AdminPage() {
           <TabHeader value="services">Services</TabHeader>
         </TabsList>
         <TabsPanel value="projects">
-          <ProjectsTab />
+          <ProjectsTab initialProjects={projects} />
         </TabsPanel>
         <TabsPanel value="services">
           <div>Services</div>

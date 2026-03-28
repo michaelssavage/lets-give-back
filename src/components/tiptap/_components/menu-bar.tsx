@@ -89,7 +89,7 @@ export const MenuBar = ({ editor }: MenuBarProps) => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-1 p-2 border-b bg-gray-50 rounded-t-md top-0 z-1">
+      <div className="flex flex-wrap gap-1 p-2 border-b bg-gray-50 rounded-t-md top-0 z-1 [&_button]:py-1 [&_button]:px-2">
         <Menu>
           <MenuTrigger
             title="Heading"

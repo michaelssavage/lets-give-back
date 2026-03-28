@@ -1,17 +1,24 @@
-import { PROJECTS, type Project } from "@/api/projects.static";
+import { type Project } from "@/api/projects.api";
 import { CreateProject } from "@/components/admin/create-project";
 import { DeleteProject } from "@/components/admin/delete-project";
 import { EditProject } from "@/components/admin/edit-project";
-import { Button } from "@/components/button/button";
 import {
   DragHandle,
   SortableItem,
   SortableList,
 } from "@/components/drag-and-drop/sortable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const ProjectsTab = () => {
-  const [projects, setProjects] = useState<Array<Project>>(PROJECTS);
+interface ProjectsTabProps {
+  initialProjects: Array<Project>;
+}
+
+export const ProjectsTab = ({ initialProjects }: ProjectsTabProps) => {
+  const [projects, setProjects] = useState<Array<Project>>(initialProjects);
+
+  useEffect(() => {
+    setProjects(initialProjects);
+  }, [initialProjects]);
 
   return (
     <section className="w-full mt-8">
@@ -20,7 +27,6 @@ export const ProjectsTab = () => {
 
         <div className="flex items-center gap-2">
           <CreateProject />
-          <Button size="sm">Save</Button>
         </div>
       </div>
 
@@ -47,7 +53,7 @@ export const ProjectsTab = () => {
 
                     <div className="flex sm:items-center gap-2 w-full sm:w-fit justify-between sm:justify-end mt-2 sm:mt-0">
                       <EditProject project={project} />
-                      <DeleteProject />
+                      <DeleteProject projectId={project.id} />
                     </div>
                   </div>
                 </div>

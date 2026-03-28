@@ -12,24 +12,34 @@ import { buttonStyles } from "@/components/button/button.styles";
 import type { ReactNode } from "react";
 
 interface ModalProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   trigger: string;
   title: string;
   description: string;
   children: ReactNode;
   className?: string;
+  triggerStyle?: string;
 }
 
 export const Modal = ({
+  open,
+  onOpenChange,
   trigger,
   title,
   description,
   children,
   className,
+  triggerStyle,
 }: ModalProps) => {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger
-        className={buttonStyles({ variant: "outline", size: "sm" })}
+        className={buttonStyles({
+          variant: "outline",
+          size: "sm",
+          className: triggerStyle,
+        })}
       >
         {trigger}
       </DialogTrigger>

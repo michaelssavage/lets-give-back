@@ -15,9 +15,10 @@ import {
 import { Button } from "@/components/button/button";
 import { buttonStyles } from "@/components/button/button.styles";
 import { baseInputStyles } from "@/components/form/base.styles";
+import { NoImagesIcon } from "@/components/icons/no-images.icon";
 import { cn } from "@/styles/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Images } from "lucide-react";
+import { Images, X } from "lucide-react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
@@ -32,6 +33,7 @@ interface ImageUploadProps {
   folder: string;
   onUpload: (url: string) => void;
   allowMultiple?: boolean;
+  canRemove?: boolean;
 }
 
 type ImagePayload =
@@ -43,6 +45,7 @@ export const ImageUpload = ({
   folder,
   onUpload,
   allowMultiple = false,
+  canRemove = true,
 }: ImageUploadProps) => {
   const [urlInput, setUrlInput] = useState("");
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -97,24 +100,43 @@ export const ImageUpload = ({
     toast.success("Image selected");
   };
 
+  const handleRemoveImage = () => {
+    onUpload("");
+    toast.success("Image removed");
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <span className="text-sm font-medium text-secondary">Image</span>
 
       <div className="flex flex-col md:flex-row md:items-center gap-2">
-        {currentUrl && (
-          <img
-            src={currentUrl}
-            alt="Project"
-            className="h-32 w-32 rounded-md object-cover"
-          />
+        {currentUrl ? (
+          <div className="relative">
+            <img
+              src={currentUrl}
+              alt="Project"
+              className="size-32 rounded-md object-cover"
+            />
+            {canRemove && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={handleRemoveImage}
+                className="absolute top-1 right-1 p-0 md:p-0"
+              >
+                <X className="size-4" />
+              </Button>
+            )}
+          </div>
+        ) : (
+          <NoImagesIcon className="size-32" />
         )}
 
         <div className="flex flex-col w-full items-center gap-2">
           <div className="flex gap-2 w-full">
             <input
               type="url"
-              placeholder="Or paste an image URL"
+              placeholder="Paste an image URL"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               disabled={mutation.isPending}

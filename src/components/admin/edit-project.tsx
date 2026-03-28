@@ -1,14 +1,19 @@
-import type { Project } from "@/api/projects.static";
+import type { Project } from "@/api/projects.api";
+import { updateProjectFn } from "@/api/projects.api";
 import { ImageUpload } from "@/components/admin/image-upload";
 import { Button } from "@/components/button/button";
 import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
 import { TiptapEditor } from "@/components/tiptap/tiptap-editor";
+import { useRouter } from "@tanstack/react-router";
 import type { JSONContent } from "@tiptap/core";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export const EditProject = ({ project }: { project: Project }) => {
+  const router = useRouter();
   const [editedProject, setEditedProject] = useState<Project>(project);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleEditField = (
     field: keyof Project,
@@ -17,8 +22,31 @@ export const EditProject = ({ project }: { project: Project }) => {
     setEditedProject((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
-    console.log(editedProject);
+  const handleSubmit = async () => {
+    if (
+      !editedProject.title ||
+      !editedProject.slug ||
+      !editedProject.date ||
+      !editedProject.subtitle ||
+      !editedProject.description ||
+      !editedProject.image
+    ) {
+      toast.error("Please fill in required fields");
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      const description = JSON.stringify(editedProject.description);
+
+      await updateProjectFn({ data: { ...editedProject, description } });
+      await router.invalidate();
+      toast.success("Project saved");
+    } catch {
+      toast.error("Failed to save project");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -35,8 +63,9 @@ export const EditProject = ({ project }: { project: Project }) => {
             label="Title"
             name="title"
             placeholder="Title"
-            value={project.title}
+            value={editedProject.title}
             onChange={(e) => handleEditField("title", e.target.value)}
+            required
           />
 
           <TextInput
@@ -44,8 +73,9 @@ export const EditProject = ({ project }: { project: Project }) => {
             label="Slug URL e.g. 'my-project-name'"
             name="slug"
             placeholder="Slug"
-            value={project.slug}
+            value={editedProject.slug}
             onChange={(e) => handleEditField("slug", e.target.value)}
+            required
           />
 
           <TextInput
@@ -53,7 +83,7 @@ export const EditProject = ({ project }: { project: Project }) => {
             label="Facebook Post URL"
             name="facebook"
             placeholder="Enter Facebook Post URL"
-            value={project.facebook}
+            value={editedProject.facebook}
             onChange={(e) => handleEditField("facebook", e.target.value)}
           />
 
@@ -62,8 +92,9 @@ export const EditProject = ({ project }: { project: Project }) => {
             label="Date"
             name="date"
             placeholder="Date"
-            value={project.date}
+            value={editedProject.date}
             onChange={(e) => handleEditField("date", e.target.value)}
+            required
           />
         </div>
 
@@ -73,32 +104,24 @@ export const EditProject = ({ project }: { project: Project }) => {
           onUpload={(url) => handleEditField("image", url)}
         />
 
-        {/* <TextInput
-          id="gallery"
-          label="Gallery"
-          name="gallery"
-          placeholder="Gallery"
-          value={project.gallery}
-          onChange={(e) => handleEditField("gallery", e.target.value)}
-        /> */}
-
         <TextInput
           id="subtitle"
           label="Subtitle"
           name="subtitle"
           placeholder="Subtitle"
-          value={project.subtitle}
+          value={editedProject.subtitle}
           onChange={(e) => handleEditField("subtitle", e.target.value)}
+          required
         />
 
         <TiptapEditor
           id={`description-${project.id}`}
-          content={project.description}
+          content={editedProject.description}
           onChange={(content) => handleEditField("description", content)}
         />
 
-        <Button size="sm" disabled={!editedProject} onClick={handleSubmit}>
-          Save
+        <Button size="sm" disabled={isSaving} onClick={handleSubmit}>
+          {isSaving ? "Saving..." : "Save"}
         </Button>
       </div>
     </Modal>

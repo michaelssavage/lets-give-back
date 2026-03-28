@@ -1,13 +1,13 @@
-import { PROJECTS } from "@/api/projects.static";
+import { getProjectBySlugFn } from "@/api/projects.api";
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
+import { TiptapViewer } from "@/components/tiptap/tiptap-viewer";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "lucide-react";
-import Markdown from "react-markdown";
 
 export const Route = createFileRoute("/projects/$slug")({
-  loader: ({ params }) => {
-    const project = PROJECTS.find((p) => p.slug === params.slug);
+  loader: async ({ params }) => {
+    const project = await getProjectBySlugFn({ data: { slug: params.slug } });
     if (!project) throw notFound();
     return project;
   },
@@ -42,7 +42,7 @@ function RouteComponent() {
       <h1 className="mb-2">{project.title}</h1>
 
       <div className="space-y-4 text-justify text-lg md:text-xl">
-        <Markdown>{project.description}</Markdown>
+        <TiptapViewer content={project.description} />
       </div>
 
       {project.facebook && (
