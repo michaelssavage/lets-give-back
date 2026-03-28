@@ -4,6 +4,7 @@ import { buttonStyles } from "@/components/button/button.styles";
 import { TiptapViewer } from "@/components/tiptap/tiptap-viewer";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "lucide-react";
+import { env } from "process";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params }) => {
@@ -12,6 +13,25 @@ export const Route = createFileRoute("/projects/$slug")({
     return project;
   },
   component: RouteComponent,
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+
+    return {
+      meta: [
+        { title: loaderData.title },
+        { property: "og:title", content: loaderData.title },
+        { name: "description", content: loaderData.subtitle },
+        { property: "og:type", content: "article" },
+        { property: "og:description", content: loaderData.subtitle },
+        { property: "og:image", content: loaderData.image },
+        { property: "twitter:image", content: loaderData.image },
+        {
+          property: "og:url",
+          content: `${env.SITE_URL}/projects/${loaderData.slug}`,
+        },
+      ],
+    };
+  },
 });
 
 function RouteComponent() {

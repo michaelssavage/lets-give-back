@@ -3,9 +3,22 @@ import { buttonStyles } from "@/components/button/button.styles";
 import { RevolutIcon } from "@/components/icons/revolut.icon";
 import { REVOLUT_URL } from "@/utils/constants";
 import { createFileRoute } from "@tanstack/react-router";
+import { env } from "process";
 
 export const Route = createFileRoute("/about")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: "About Us" },
+      { property: "og:title", content: "About Us" },
+      { name: "description", content: "About Us" },
+      { property: "og:type", content: "website" },
+      { property: "og:description", content: "About Us" },
+      { property: "og:image", content: "/services/banner.jpg" },
+      { property: "twitter:image", content: "/services/banner.jpg" },
+      { property: "og:url", content: `${env.SITE_URL}/about` },
+    ],
+  }),
 });
 
 function RouteComponent() {

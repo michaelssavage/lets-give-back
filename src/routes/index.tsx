@@ -4,10 +4,25 @@ import { Fireworks } from "@/components/fireworks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRightIcon, Handshake, Share2, Sprout } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { env } from "process";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 
-export const Route = createFileRoute("/")({ component: App });
+export const Route = createFileRoute("/")({
+  component: App,
+  head: () => ({
+    meta: [
+      { title: "Let's Give Back" },
+      { property: "og:title", content: "Let's Give Back" },
+      { name: "description", content: "Let's Give Back" },
+      { property: "og:type", content: "website" },
+      { property: "og:description", content: "Let's Give Back" },
+      { property: "og:image", content: "/services/banner.jpg" },
+      { property: "twitter:image", content: "/services/banner.jpg" },
+      { property: "og:url", content: `${env.SITE_URL}/` },
+    ],
+  }),
+});
 
 const SUPPORTED_GROUPS = [
   "Elderly residents",

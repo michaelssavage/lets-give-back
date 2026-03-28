@@ -5,9 +5,22 @@ import { Card } from "@/components/card";
 import { FacebookIcon } from "@/components/icons/facebook.icon";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { env } from "process";
 
 export const Route = createFileRoute("/projects/")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: "Projects" },
+      { property: "og:title", content: "Projects" },
+      { name: "description", content: "Projects" },
+      { property: "og:type", content: "website" },
+      { property: "og:description", content: "Projects" },
+      { property: "og:image", content: "/services/earth.jpg" },
+      { property: "twitter:image", content: "/services/earth.jpg" },
+      { property: "og:url", content: `${env.SITE_URL}/projects` },
+    ],
+  }),
 });
 
 function RouteComponent() {

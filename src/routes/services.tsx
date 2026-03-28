@@ -11,9 +11,22 @@ import { REVOLUT_URL } from "@/utils/constants";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
+import { env } from "process";
 
 export const Route = createFileRoute("/services")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: "Services" },
+      { property: "og:title", content: "Services" },
+      { name: "description", content: "Services" },
+      { property: "og:type", content: "website" },
+      { property: "og:description", content: "Services" },
+      { property: "og:image", content: "/services/banner.jpg" },
+      { property: "twitter:image", content: "/services/banner.jpg" },
+      { property: "og:url", content: `${env.SITE_URL}/services` },
+    ],
+  }),
 });
 
 const servicePairs = (items: Array<Service>) => {

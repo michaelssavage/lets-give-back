@@ -9,10 +9,23 @@ import { TextInput } from "@/components/form/text-input";
 import { PHONE_NUMBER } from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { env } from "process";
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
 export const Route = createFileRoute("/contact")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: "Contact Us" },
+      { property: "og:title", content: "Contact Us" },
+      { name: "description", content: "Contact Us" },
+      { property: "og:type", content: "website" },
+      { property: "og:description", content: "Contact Us" },
+      { property: "og:image", content: "/services/banner.jpg" },
+      { property: "twitter:image", content: "/services/banner.jpg" },
+      { property: "og:url", content: `${env.SITE_URL}/contact` },
+    ],
+  }),
 });
 
 type FormErrors = Partial<Record<keyof ContactFormData, string>>;
