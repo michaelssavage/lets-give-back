@@ -1,7 +1,12 @@
-import { getProjectsFn } from "@/api/projects.api";
-import { ProjectsTab } from "@/components/admin/projects.tab";
+import { ProjectsTab } from "@/components/admin/projects/projects.tab";
+import { ServicesTab } from "@/components/admin/services/services.tab";
 import { TabHeader, Tabs, TabsList, TabsPanel } from "@/components/base/tabs";
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { z } from "zod";
+
+const searchSchema = z.object({
+  tab: z.enum(["projects", "services"]).default("projects"),
+});
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: ({ context }) => {
@@ -9,13 +14,18 @@ export const Route = createFileRoute("/admin")({
       throw redirect({ to: "/login" });
     }
   },
-  loader: () => getProjectsFn(),
+  validateSearch: searchSchema,
   component: AdminPage,
 });
 
 function AdminPage() {
   const { user } = Route.useRouteContext();
-  const projects = Route.useLoaderData();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const { tab } = Route.useSearch();
+
+  const handleTabChange = (tab: "projects" | "services") => {
+    navigate({ search: { tab } });
+  };
 
   return (
     <section className="px-6 py-8 md:px-12 mx-12">
@@ -25,16 +35,26 @@ function AdminPage() {
           Signed in as <strong>{user?.email}</strong>
         </p>
       </div>
-      <Tabs>
+      <Tabs value={tab}>
         <TabsList>
-          <TabHeader value="projects">Projects</TabHeader>
-          <TabHeader value="services">Services</TabHeader>
+          <TabHeader
+            value="projects"
+            onClick={() => handleTabChange("projects")}
+          >
+            Projects
+          </TabHeader>
+          <TabHeader
+            value="services"
+            onClick={() => handleTabChange("services")}
+          >
+            Services
+          </TabHeader>
         </TabsList>
         <TabsPanel value="projects">
-          <ProjectsTab initialProjects={projects} />
+          <ProjectsTab />
         </TabsPanel>
         <TabsPanel value="services">
-          <div>Services</div>
+          <ServicesTab />
         </TabsPanel>
       </Tabs>
     </section>

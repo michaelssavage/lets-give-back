@@ -1,6 +1,6 @@
 import type { Project } from "@/api/projects.api";
 import { updateProjectFn } from "@/api/projects.api";
-import { ImageUpload } from "@/components/admin/image-upload";
+import { ImageUpload } from "@/components/admin/projects/image-upload";
 import { Button } from "@/components/button/button";
 import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";

@@ -3,18 +3,29 @@ import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { Card } from "@/components/card";
 import { FacebookIcon } from "@/components/icons/facebook.icon";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/projects/")({
-  loader: () => getProjectsFn(),
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const projects = Route.useLoaderData();
+  const {
+    data: projects = [],
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["projects"],
+    queryFn: getProjectsFn,
+  });
+
+  if (!isLoading && error) {
+    return <div>Error loading projects</div>;
+  }
 
   return (
-    <div className="text-center px-6 py-8 md:px-12 md:pb-16 max-w-5xl mx-auto">
+    <div className="min-h-screen text-center px-6 py-8 md:px-12 md:pb-16 max-w-5xl mx-auto">
       <h1>PROJECTS</h1>
 
       <p className="mt-4 mb-8 text-center text-base md:text-lg">
@@ -34,19 +45,25 @@ function RouteComponent() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {projects.map((project) => (
-          <Link
-            to="/projects/$slug"
-            params={{ slug: project.slug }}
-            key={project.id}
-          >
-            <Card
-              title={project.title}
-              subtitle={project.subtitle}
-              image={project.image}
-            />
-          </Link>
-        ))}
+        {isLoading ? (
+          <div className="flex items-center justify-center h-full">
+            Loading projects...
+          </div>
+        ) : (
+          projects.map((project) => (
+            <Link
+              to="/projects/$slug"
+              params={{ slug: project.slug }}
+              key={project.id}
+            >
+              <Card
+                title={project.title}
+                subtitle={project.subtitle}
+                image={project.image}
+              />
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

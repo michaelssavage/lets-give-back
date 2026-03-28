@@ -111,11 +111,11 @@ export const ImageUpload = ({
 
       <div className="flex flex-col md:flex-row md:items-center gap-2">
         {currentUrl ? (
-          <div className="relative">
+          <div className="relative size-32">
             <img
               src={currentUrl}
               alt="Project"
-              className="size-32 rounded-md object-cover"
+              className="size-full rounded-md object-cover"
             />
             {canRemove && (
               <Button

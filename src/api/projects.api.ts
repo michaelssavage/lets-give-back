@@ -88,6 +88,20 @@ export const updateProjectFn = createServerFn({ method: "POST" })
     return { success: true };
   });
 
+export const saveProjectOrderFn = createServerFn({ method: "POST" })
+  .inputValidator(z.object({ projects: z.array(z.object({ id: z.string() })) }))
+  .handler(async ({ data }) => {
+    await env.DB.batch(
+      data.projects.map((project, index) =>
+        env.DB.prepare("UPDATE projects SET sort_order = ? WHERE id = ?").bind(
+          index,
+          project.id,
+        ),
+      ),
+    );
+    return { success: true };
+  });
+
 export const createProjectFn = createServerFn({ method: "POST" })
   .inputValidator(z.object({ title: z.string().min(1) }))
   .handler(async ({ data }) => {
