@@ -1,9 +1,8 @@
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { RevolutIcon } from "@/components/icons/revolut.icon";
-import { REVOLUT_URL } from "@/utils/constants";
+import { REVOLUT_URL, SITE_URL } from "@/utils/constants";
 import { createFileRoute } from "@tanstack/react-router";
-import { env } from "process";
 
 export const Route = createFileRoute("/about")({
   component: RouteComponent,
@@ -16,7 +15,7 @@ export const Route = createFileRoute("/about")({
       { property: "og:description", content: "About Us" },
       { property: "og:image", content: "/services/banner.jpg" },
       { property: "twitter:image", content: "/services/banner.jpg" },
-      { property: "og:url", content: `${env.SITE_URL}/about` },
+      { property: "og:url", content: `${SITE_URL}/about` },
     ],
   }),
 });

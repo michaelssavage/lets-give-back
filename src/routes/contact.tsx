@@ -6,10 +6,9 @@ import {
 import { Anchor } from "@/components/anchor";
 import { PhoneInput } from "@/components/form/phone-input";
 import { TextInput } from "@/components/form/text-input";
-import { PHONE_NUMBER } from "@/utils/constants";
+import { PHONE_NUMBER, SITE_URL } from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { env } from "process";
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
 export const Route = createFileRoute("/contact")({
@@ -23,7 +22,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:description", content: "Contact Us" },
       { property: "og:image", content: "/services/banner.jpg" },
       { property: "twitter:image", content: "/services/banner.jpg" },
-      { property: "og:url", content: `${env.SITE_URL}/contact` },
+      { property: "og:url", content: `${SITE_URL}/contact` },
     ],
   }),
 });

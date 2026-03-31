@@ -1,3 +1,5 @@
+export const SITE_URL = import.meta.env.VITE_SITE_URL;
+
 export const SITE_NAME = "Let's Give Back";
 export const SITE_DESCRIPTION =
   "Let's Give Back is a community-focused organisation with a primary mission to support key groups such as youth, individuals facing mental health challenges, those recovering from addiction, and the elderly.";

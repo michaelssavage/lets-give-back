@@ -2,9 +2,9 @@ import { getProjectBySlugFn } from "@/api/projects.api";
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { TiptapViewer } from "@/components/tiptap/tiptap-viewer";
+import { SITE_URL } from "@/utils/constants";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "lucide-react";
-import { env } from "process";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params }) => {
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/projects/$slug")({
         { property: "twitter:image", content: loaderData.image },
         {
           property: "og:url",
-          content: `${env.SITE_URL}/projects/${loaderData.slug}`,
+          content: `${SITE_URL}/projects/${loaderData.slug}`,
         },
       ],
     };
