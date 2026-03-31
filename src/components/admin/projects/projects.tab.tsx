@@ -38,7 +38,7 @@ export const ProjectsTab = () => {
   };
 
   return (
-    <section className="w-full mt-8">
+    <section className="w-full mt-4 md:mt-8">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
         <h2>Projects</h2>
 

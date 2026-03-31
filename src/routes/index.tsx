@@ -1,10 +1,10 @@
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { Fireworks } from "@/components/fireworks";
+import { SITE_URL } from "@/utils/constants";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRightIcon, Handshake, Share2, Sprout } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { env } from "process";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Let's Give Back" },
       { property: "og:image", content: "/services/banner.jpg" },
       { property: "twitter:image", content: "/services/banner.jpg" },
-      { property: "og:url", content: `${env.SITE_URL}/` },
+      { property: "og:url", content: `${SITE_URL}/` },
     ],
   }),
 });

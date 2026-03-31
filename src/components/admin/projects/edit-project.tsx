@@ -14,6 +14,11 @@ export const EditProject = ({ project }: { project: Project }) => {
   const router = useRouter();
   const [editedProject, setEditedProject] = useState<Project>(project);
   const [isSaving, setIsSaving] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenChange = () => {
+    setIsOpen(false);
+  };
 
   const handleEditField = (
     field: keyof Project,
@@ -51,7 +56,9 @@ export const EditProject = ({ project }: { project: Project }) => {
 
   return (
     <Modal
-      className="w-[94vw] sm:w-2/3"
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      className="w-[94vw] max-w-[96vw] sm:max-w-[calc(100vw-3rem)] sm:w-2/3 max-h-[94vh] sm:max-h-[90vh]"
       title="Edit Project"
       description="Edit the project"
       trigger="Edit"
@@ -109,6 +116,8 @@ export const EditProject = ({ project }: { project: Project }) => {
           label="Subtitle"
           name="subtitle"
           placeholder="Subtitle"
+          type="textarea"
+          className="min-h-[80px]"
           value={editedProject.subtitle}
           onChange={(e) => handleEditField("subtitle", e.target.value)}
           required
@@ -120,9 +129,15 @@ export const EditProject = ({ project }: { project: Project }) => {
           onChange={(content) => handleEditField("description", content)}
         />
 
-        <Button size="sm" disabled={isSaving} onClick={handleSubmit}>
-          {isSaving ? "Saving..." : "Save"}
-        </Button>
+        <div className="flex flex-row flex-wrap items-center justify-end gap-2">
+          <Button size="sm" variant="outline" onClick={handleOpenChange}>
+            Cancel
+          </Button>
+
+          <Button size="sm" disabled={isSaving} onClick={handleSubmit}>
+            {isSaving ? "Saving..." : "Save"}
+          </Button>
+        </div>
       </div>
     </Modal>
   );

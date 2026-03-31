@@ -3,9 +3,9 @@ import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { Card } from "@/components/card";
 import { FacebookIcon } from "@/components/icons/facebook.icon";
+import { SITE_URL } from "@/utils/constants";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { env } from "process";
 
 export const Route = createFileRoute("/projects/")({
   component: RouteComponent,
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/projects/")({
       { property: "og:description", content: "Projects" },
       { property: "og:image", content: "/services/earth.jpg" },
       { property: "twitter:image", content: "/services/earth.jpg" },
-      { property: "og:url", content: `${env.SITE_URL}/projects` },
+      { property: "og:url", content: `${SITE_URL}/projects` },
     ],
   }),
 });

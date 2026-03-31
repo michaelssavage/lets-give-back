@@ -28,10 +28,10 @@ function AdminPage() {
   };
 
   return (
-    <section className="px-6 py-8 md:px-12 mx-12">
-      <div className="max-w-5xl mx-auto">
+    <section className="px-6 py-8 md:px-12 md:mx-12">
+      <div className="md:max-w-5xl mx-4 md:mx-auto">
         <h1 className="mb-2">Admin</h1>
-        <p className="text-lg mb-6">
+        <p className="text-base md:text-lg mb-6">
           Signed in as <strong>{user?.email}</strong>
         </p>
       </div>

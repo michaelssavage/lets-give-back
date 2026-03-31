@@ -122,14 +122,14 @@ export const ServicesTab = () => {
               className="border bg-white border-secondary p-4 rounded-lg flex flex-col gap-4"
             >
               <div className="flex flex-col md:flex-row gap-4">
-                <div className="md:w-1/2">
+                <div className="md:flex-5">
                   <ImageUpload
                     currentUrl={pair.image.image}
                     folder="services"
                     onUpload={(url) => updatePairImage(index, url)}
                   />
                 </div>
-                <div className="md:w-1/2 flex flex-col gap-2">
+                <div className="md:flex-4 flex flex-col gap-2">
                   <span className="text-sm font-medium text-secondary">
                     Description
                   </span>

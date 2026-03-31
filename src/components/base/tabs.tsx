@@ -32,7 +32,7 @@ export const TabHeader = (props: React.ComponentProps<typeof TabsBase.Tab>) => {
     <TabsBase.Tab
       {...props}
       className={cn(
-        "flex items-center justify-center border-0 px-3 py-2 m-1 rounded-[calc(var(--radius-lg)-1px)] text-xl font-medium break-keep whitespace-nowrap text-secondary",
+        "flex items-center justify-center border-0 px-2 md:px-3 py-1 md:py-2 m-1 rounded-[calc(var(--radius-lg)-1px)] text-base md:text-xl font-medium break-keep whitespace-nowrap text-secondary",
         "outline-hidden select-none before:inset-x-0 before:inset-y-1 before:rounded-xs before:-outline-offset-1 before:outline-primary-blue",
         "hover:text-black decoration-primary-orange data-active:bg-dark-blue data-active:text-white focus-visible:relative focus-visible:before:absolute focus-visible:before:outline",
         props.className,
@@ -47,7 +47,7 @@ export const TabsPanel = (
   return (
     <TabsBase.Panel
       {...props}
-      className="relative rounded-lg flex w-full p-4 -outline-offset-1 outline-primary-blue focus-visible:rounded-md focus-visible:outline-2"
+      className="relative rounded-lg flex w-full -outline-offset-1 outline-primary-blue focus-visible:rounded-md focus-visible:outline-2"
     />
   );
 };

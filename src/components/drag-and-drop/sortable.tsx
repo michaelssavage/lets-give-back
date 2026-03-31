@@ -62,7 +62,7 @@ export const DragHandle = ({
       {...listeners}
       className={`cursor-grab active:cursor-grabbing touch-none ${className}`}
     >
-      <Grip className="size-5 text-gray-400" />
+      <Grip className="size-5 text-gray-400 shrink-0" />
     </div>
   );
 };

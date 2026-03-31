@@ -7,11 +7,10 @@ import {
 import { Anchor } from "@/components/anchor";
 import { buttonStyles } from "@/components/button/button.styles";
 import { RevolutIcon } from "@/components/icons/revolut.icon";
-import { REVOLUT_URL } from "@/utils/constants";
+import { REVOLUT_URL, SITE_URL } from "@/utils/constants";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
-import { env } from "process";
 
 export const Route = createFileRoute("/services")({
   component: RouteComponent,
@@ -24,7 +23,7 @@ export const Route = createFileRoute("/services")({
       { property: "og:description", content: "Services" },
       { property: "og:image", content: "/services/banner.jpg" },
       { property: "twitter:image", content: "/services/banner.jpg" },
-      { property: "og:url", content: `${env.SITE_URL}/services` },
+      { property: "og:url", content: `${SITE_URL}/services` },
     ],
   }),
 });
