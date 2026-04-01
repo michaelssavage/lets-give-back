@@ -1,3 +1,4 @@
+import { GalleryTab } from "@/components/admin/gallery.tab";
 import { ProjectsTab } from "@/components/admin/projects/projects.tab";
 import { ServicesTab } from "@/components/admin/services/services.tab";
 import { TabHeader, Tabs, TabsList, TabsPanel } from "@/components/base/tabs";
@@ -5,7 +6,7 @@ import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 
 const searchSchema = z.object({
-  tab: z.enum(["projects", "services"]).default("projects"),
+  tab: z.enum(["projects", "services", "gallery"]).default("projects"),
 });
 
 export const Route = createFileRoute("/admin")({
@@ -23,7 +24,7 @@ function AdminPage() {
   const navigate = useNavigate({ from: Route.fullPath });
   const { tab } = Route.useSearch();
 
-  const handleTabChange = (tab: "projects" | "services") => {
+  const handleTabChange = (tab: z.infer<typeof searchSchema>["tab"]) => {
     navigate({ search: { tab } });
   };
 
@@ -49,12 +50,18 @@ function AdminPage() {
           >
             Services
           </TabHeader>
+          <TabHeader value="gallery" onClick={() => handleTabChange("gallery")}>
+            Gallery
+          </TabHeader>
         </TabsList>
         <TabsPanel value="projects">
           <ProjectsTab />
         </TabsPanel>
         <TabsPanel value="services">
           <ServicesTab />
+        </TabsPanel>
+        <TabsPanel value="gallery">
+          <GalleryTab />
         </TabsPanel>
       </Tabs>
     </section>
