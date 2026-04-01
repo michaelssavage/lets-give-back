@@ -39,7 +39,7 @@ export const Footer = () => {
         </div>
 
         {/* 2 Socials */}
-        <div className="flex flex-col flex-wrap gap-3 xs:justify-self-center xs:w-75">
+        <div className="flex flex-col flex-wrap gap-3 xs:justify-self-center xs:w-75 [&_a]:w-fit">
           <h4 className="text-lg lg:text-xl font-bold">Socials:</h4>
           <Anchor href={FACEBOOK_URL} className="hover:underline" isExternal>
             <FacebookIcon size={24} className="fill-white shrink-0" />
@@ -90,16 +90,16 @@ export const Footer = () => {
         </div>
 
         {/* 3 Quick Links */}
-        <div className="flex flex-col flex-wrap gap-3 xs:justify-self-center xs:w-75">
+        <div className="flex flex-col flex-wrap gap-3 xs:justify-self-center xs:w-75 [&_a]:w-fit">
           <h4 className="text-lg lg:text-xl font-bold">Quick Links:</h4>
-          <Link to="/" className="hover:underline">
-            Home
+          <Link to="/admin" className="hover:underline">
+            Admin
           </Link>
           <Link to="/projects" className="hover:underline">
-            Our Projects
+            Projects
           </Link>
           <Link to="/services" className="hover:underline">
-            Our Services
+            Services
           </Link>
           <Link to="/about" className="hover:underline">
             About Us

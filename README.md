@@ -4,4 +4,4 @@ A community-focused organisation with a primary mission to support key groups su
 
 Site: letsgiveback.ie
 
-Tech: Tanstack Start, Cloudflare workers.
+Tech: Tanstack Start, Cloudflare workers, Tailwind

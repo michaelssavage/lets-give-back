@@ -67,6 +67,33 @@ export const uploadImage = createServerFn({ method: "POST" })
     return { url };
   });
 
+export const listAllImages = createServerFn({ method: "POST" }).handler(
+  async () => {
+    const user = await getCurrentUserFromSession();
+    if (!user) throw new Error("Unauthorized");
+
+    const list = await env.MEDIA_BUCKET.list();
+
+    return list.objects.map((obj) => ({
+      key: obj.key,
+      url: import.meta.env.DEV
+        ? `/api/media?key=${encodeURIComponent(obj.key)}`
+        : `${MEDIA_URL}/${obj.key}`,
+    }));
+  },
+);
+
+export const deleteImages = createServerFn({ method: "POST" })
+  .inputValidator(z.object({ keys: z.array(z.string().min(1)) }))
+  .handler(async ({ data }) => {
+    const user = await getCurrentUserFromSession();
+    if (!user) throw new Error("Unauthorized");
+
+    await Promise.all(data.keys.map((key) => env.MEDIA_BUCKET.delete(key)));
+
+    return { deleted: data.keys.length };
+  });
+
 export const uploadImageFromUrl = createServerFn({ method: "POST" })
   .inputValidator(uploadImageFromUrlSchema)
   .handler(async ({ data }) => {
