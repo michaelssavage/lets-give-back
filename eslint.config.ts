@@ -17,6 +17,7 @@ export default defineConfig([
     plugins: { js, "jsx-a11y": jsxA11y },
     extends: ["js/recommended"],
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    settings: { react: { version: "19" } },
     rules: {
       ...reactHooks.configs.recommended.rules,
       ...jsxA11y.configs.recommended.rules,
