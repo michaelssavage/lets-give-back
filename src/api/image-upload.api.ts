@@ -74,12 +74,14 @@ export const listAllImages = createServerFn({ method: "POST" }).handler(
 
     const list = await env.MEDIA_BUCKET.list();
 
-    return list.objects.map((obj) => ({
-      key: obj.key,
-      url: import.meta.env.DEV
-        ? `/api/media?key=${encodeURIComponent(obj.key)}`
-        : `${MEDIA_URL}/${obj.key}`,
-    }));
+    return list.objects
+      .filter((obj) => !obj.key.endsWith("/"))
+      .map((obj) => ({
+        key: obj.key,
+        url: import.meta.env.DEV
+          ? `/api/media?key=${encodeURIComponent(obj.key)}`
+          : `${MEDIA_URL}/${obj.key}`,
+      }));
   },
 );
 
