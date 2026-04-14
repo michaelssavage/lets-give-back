@@ -98,6 +98,11 @@ function RouteComponent() {
               ? (second as ServiceText)
               : (first as ServiceText);
 
+            const imageMissing = !imageItem.image?.trim();
+            const textEmpty = !textItem.description?.trim();
+
+            if (imageMissing && textEmpty) return null;
+
             const imageBlock = (
               <div
                 className={`md:col-span-2 rounded-2xl overflow-hidden h-full ${
