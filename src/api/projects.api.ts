@@ -13,6 +13,7 @@ export interface Project {
   image: string;
   facebook: string;
   sort_order: number;
+  isDraft: boolean;
 }
 
 interface ProjectRow {
@@ -25,12 +26,15 @@ interface ProjectRow {
   image: string;
   facebook: string;
   sort_order: number;
+  is_draft: number;
 }
 
 function rowToProject(row: ProjectRow): Project {
+  const { is_draft, ...rest } = row;
   return {
-    ...row,
+    ...rest,
     description: JSON.parse(row.description) as JSONContent,
+    isDraft: is_draft === 1,
   };
 }
 
@@ -64,6 +68,7 @@ const updateProjectSchema = z.object({
   description: z.string(), // JSON-serialised JSONContent
   image: z.string(),
   facebook: z.string(),
+  isDraft: z.boolean(),
 });
 
 export const updateProjectFn = createServerFn({ method: "POST" })
@@ -71,7 +76,7 @@ export const updateProjectFn = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await env.DB.prepare(
       `UPDATE projects
-       SET slug = ?, date = ?, title = ?, subtitle = ?, description = ?, image = ?, facebook = ?
+       SET slug = ?, date = ?, title = ?, subtitle = ?, description = ?, image = ?, facebook = ?, is_draft = ?
        WHERE id = ?`,
     )
       .bind(
@@ -82,6 +87,7 @@ export const updateProjectFn = createServerFn({ method: "POST" })
         data.description,
         data.image,
         data.facebook,
+        data.isDraft ? 1 : 0,
         data.id,
       )
       .run();
@@ -118,8 +124,8 @@ export const createProjectFn = createServerFn({ method: "POST" })
     const nextOrder = (results[0]?.max_order ?? 0) + 1;
 
     await env.DB.prepare(
-      `INSERT INTO projects (id, slug, date, title, subtitle, description, image, facebook, sort_order)
-       VALUES (?, ?, ?, ?, '', '{}', '', '', ?)`,
+      `INSERT INTO projects (id, slug, date, title, subtitle, description, image, facebook, sort_order, is_draft)
+       VALUES (?, ?, ?, ?, '', '{}', '', '', ?, 1)`,
     )
       .bind(id, slug, date, data.title, nextOrder)
       .run();

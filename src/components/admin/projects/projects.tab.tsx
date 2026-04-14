@@ -73,7 +73,14 @@ export const ProjectsTab = () => {
                     <DragHandle {...dragHandleProps} />
                     <div className="border bg-white border-secondary p-4 rounded-lg flex-1 flex flex-col sm:flex-row items-center justify-between">
                       <div className="flex flex-col gap-1">
-                        <p className="text-lg font-bold">{project.title}</p>
+                        <p className="text-lg font-bold">
+                          {project.title}
+                          {project.isDraft && (
+                            <span className="ml-2 text-sm font-medium text-secondary/80">
+                              Draft
+                            </span>
+                          )}
+                        </p>
                         <p>{project.subtitle}</p>
                       </div>
 

@@ -2,6 +2,7 @@ import type { Project } from "@/api/projects.api";
 import { updateProjectFn } from "@/api/projects.api";
 import { ImageUpload } from "@/components/admin/projects/image-upload";
 import { Button } from "@/components/button/button";
+import { Checkbox } from "@/components/form/checkbox";
 import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
 import { TiptapEditor } from "@/components/tiptap/tiptap-editor";
@@ -22,19 +23,20 @@ export const EditProject = ({ project }: { project: Project }) => {
 
   const handleEditField = (
     field: keyof Project,
-    value: string | JSONContent,
+    value: string | JSONContent | boolean,
   ) => {
     setEditedProject((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async () => {
     if (
-      !editedProject.title ||
-      !editedProject.slug ||
-      !editedProject.date ||
-      !editedProject.subtitle ||
-      !editedProject.description ||
-      !editedProject.image
+      !editedProject.isDraft &&
+      (!editedProject.title ||
+        !editedProject.slug ||
+        !editedProject.date ||
+        !editedProject.subtitle ||
+        !editedProject.description ||
+        !editedProject.image)
     ) {
       toast.error("Please fill in required fields");
       return;
@@ -51,6 +53,7 @@ export const EditProject = ({ project }: { project: Project }) => {
       toast.error("Failed to save project");
     } finally {
       setIsSaving(false);
+      setIsOpen(false);
     }
   };
 
@@ -64,6 +67,14 @@ export const EditProject = ({ project }: { project: Project }) => {
       trigger="Edit"
     >
       <div className="mt-4 space-y-4">
+        <Checkbox
+          id={`is-draft-${project.id}`}
+          label="Is Draft (If toggled, it will be hidden from the projects list)"
+          name="isDraft"
+          value={editedProject.isDraft}
+          onChange={(e) => handleEditField("isDraft", e.target.checked)}
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
           <TextInput
             id="title"

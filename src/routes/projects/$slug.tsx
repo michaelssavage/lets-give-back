@@ -10,6 +10,7 @@ export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params }) => {
     const project = await getProjectBySlugFn({ data: { slug: params.slug } });
     if (!project) throw notFound();
+    if (project.isDraft) throw notFound();
     return project;
   },
   component: RouteComponent,
@@ -51,11 +52,13 @@ function RouteComponent() {
       </Link>
 
       <div className="rounded-2xl overflow-hidden card-shadow aspect-4/3 w-full mb-6">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
+        {project.image && (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
 
       <p className="text-sm mb-4">{project.date}</p>

@@ -31,6 +31,7 @@ function RouteComponent() {
   } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjectsFn,
+    select: (data) => data.filter((project) => !project.isDraft),
   });
 
   if (!isLoading && error) {
@@ -57,26 +58,42 @@ function RouteComponent() {
         </Anchor>
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {isLoading ? (
-          <div className="flex items-center justify-center h-full">
-            Loading projects...
-          </div>
-        ) : (
-          projects.map((project) => (
-            <Link
-              to="/projects/$slug"
-              params={{ slug: project.slug }}
-              key={project.id}
-            >
-              <Card
-                title={project.title}
-                subtitle={project.subtitle}
-                image={project.image}
-              />
-            </Link>
-          ))
-        )}
+      {isLoading && (
+        <span className="sr-only" aria-live="polite">
+          Loading projects
+        </span>
+      )}
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        aria-busy={isLoading}
+      >
+        {isLoading
+          ? Array.from({ length: 4 }, (_, i) => (
+              <div
+                key={i}
+                className="relative overflow-hidden rounded-2xl card-shadow aspect-4/3 animate-pulse bg-secondary/15"
+                aria-hidden
+              >
+                <div className="absolute inset-0 bg-linear-to-t from-secondary/25 via-secondary/10 to-secondary/5" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-3">
+                  <div className="h-7 max-w-[72%] rounded-md bg-secondary/35" />
+                  <div className="h-5 max-w-[95%] rounded-md bg-secondary/25" />
+                </div>
+              </div>
+            ))
+          : projects.map((project) => (
+              <Link
+                to="/projects/$slug"
+                params={{ slug: project.slug }}
+                key={project.id}
+              >
+                <Card
+                  title={project.title}
+                  subtitle={project.subtitle}
+                  image={project.image}
+                />
+              </Link>
+            ))}
       </div>
     </div>
   );
