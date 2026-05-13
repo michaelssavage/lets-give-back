@@ -64,7 +64,7 @@ function RouteComponent() {
       <p className="text-sm mb-4">{project.date}</p>
       <h1 className="mb-2">{project.title}</h1>
 
-      <div className="space-y-4 text-justify text-lg md:text-xl">
+      <div className="space-y-4 text-balance text-lg md:text-xl">
         <TiptapViewer content={project.description} />
       </div>
 

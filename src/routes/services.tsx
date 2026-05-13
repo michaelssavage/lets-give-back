@@ -119,7 +119,7 @@ function RouteComponent() {
 
             const textBlock = (
               <div
-                className={`border border-black card-shadow rounded-2xl p-4 h-full flex flex-col justify-center ${
+                className={`border border-black card-shadow bg-white rounded-2xl p-4 h-full flex flex-col justify-center ${
                   !imageFirst ? "md:order-1" : "md:order-2"
                 }`}
               >

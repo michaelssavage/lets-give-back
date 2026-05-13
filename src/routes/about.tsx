@@ -23,38 +23,62 @@ export const Route = createFileRoute("/about")({
 function RouteComponent() {
   return (
     <div className="text-center px-6 py-8 md:px-12 md:pb-16 max-w-5xl mx-auto">
-      <h1>ABOUT US</h1>
+      <h1>About Us</h1>
+
+      <div className="flex flex-col sm:flex-row gap-4 mt-8">
+        <div className="flex-2 flex flex-col gap-4">
+          <p className="text-base md:text-lg text-justify">
+            Let&apos;s Give Back was founded by a social care professional,
+            Mark, and he is supported by a team of qualified social care
+            practitioners with over 10 years&apos; experience supporting
+            individuals in residential and community settings, with a strong
+            focus on person-centred practice and meaningful engagement.
+          </p>
+          <p className="text-lg md:text-xl text-left font-bold">
+            How We Work Safely
+          </p>
+
+          <p className="text-base md:text-lg text-left">
+            All of our projects are delivered in partnership with services, with
+            appropriate supervision and support, following safeguarding and risk
+            assessment procedures, and in line with best practice in social
+            care.
+          </p>
+        </div>
+
+        <div className="flex-1">
+          <img
+            src="/assets/timber.jpg"
+            alt="Skill building through painting"
+            width={500}
+            height={500}
+            className="rounded-2xl object-contain w-full h-auto"
+          />
+        </div>
+      </div>
+
+      <h2 className="mt-8 mb-2 text-left">Our Vision</h2>
       <p className="text-base md:text-lg text-justify">
-        Let&apos;s Give Back CLG is a community-driven social enterprise founded
-        in Co. Monaghan, and growing across Ireland&apos;s counties and border
-        regions. Our mission is to bring people together through hands-on
-        projects that build{" "}
-        <span className="font-bold">skills, confidence, and connection.</span>{" "}
-        We transform homes, gardens, and community spaces for individuals and
-        families facing difficult times. Every renovation builds confidence,
-        teamwork, and pride, so that we can create visible change for those who
-        need it most.
+        A community where generations are connected, where young people and
+        older adults support one another, and where everyone feels valued,
+        included, and part of something meaningful.
       </p>
-      <h3 className="mt-8 mb-4">Teaching Life Skills Through Simple Jobs</h3>
+      <h2 className="mt-8 mb-2 text-left">Our Mission</h2>
       <p className="text-base md:text-lg text-justify">
-        Our work spans Community Renovation Projects, Skills &amp; Training
-        Workshops,{" "}
-        <Anchor
-          href="https://www.facebook.com/permalink.php?story_fbid=pfbid02QSCFhWX77hLe4xDNSahRag2wNTWQz6v2CbvTRdMoNGrdB7GYkT6wfpVPrjNtDfg2l&id=61573558281380"
-          className="inline-flex decoration-5 underline decoration-primary-orange hover:decoration-dark-orange"
-          isExternal
-        >
-          a Mobile Food &amp; Coffee Truck
-        </Anchor>
-        , Youth &amp; Inclusion Projects, Community Partnerships, and Recovery
-        &amp; Wellbeing Through Action. <br />
-        <br /> None of it happens without people, so we&apos;re always looking
-        for volunteers who want to roll up their sleeves and get involved.
-        Financial donations are gratefully received through our Revolut account,
-        but giving back doesn&apos;t have to mean money. Leftover timber, paint,
-        tools, and other materials are just as valuable to us, so if you have
-        something sitting unused, we&apos;ll put it to good use!
+        To create opportunities for people across all ages and abilities to come
+        together through structured, person-centred projects that promote
+        inclusion, skill development, and wellbeing. We aim to reduce isolation,
+        empower participation, and build stronger communities through
+        meaningful, shared experiences.
       </p>
+
+      <img
+        src="/assets/painting.jpg"
+        alt="Skill building through painting"
+        width={1000}
+        height={1000}
+        className="mt-8 rounded-2xl"
+      />
 
       <Anchor
         href={REVOLUT_URL}

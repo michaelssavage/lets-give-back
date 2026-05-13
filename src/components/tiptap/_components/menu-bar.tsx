@@ -10,6 +10,7 @@ import {
   MenuTrigger,
 } from "@/components/base/menu";
 import { buttonStyles } from "@/components/button/button.styles";
+import { ImageButton } from "@/components/tiptap/_components/image-button";
 import { cn } from "@/styles/utils";
 import type { Editor } from "@tiptap/react";
 import { useEditorState } from "@tiptap/react";
@@ -246,7 +247,7 @@ export const MenuBar = ({ editor }: MenuBarProps) => {
 
         <Separator orientation="vertical" className="mx-1" />
 
-        {/* <ImageButton editor={editor} uploadUrl={uploadUrl} imagesUrl={imagesUrl} /> */}
+        <ImageButton editor={editor} />
         <TiptapYoutube editor={editor} />
 
         <TableButton editor={editor} />
