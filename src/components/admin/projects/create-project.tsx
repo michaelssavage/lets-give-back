@@ -2,34 +2,43 @@ import { createProjectFn } from "@/api/projects.api";
 import { Button } from "@/components/button/button";
 import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
-import { useRouter } from "@tanstack/react-router";
+import { useFocus } from "@/hooks/use-focus.hook";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const CreateProject = () => {
-  const router = useRouter();
+  const queryClient = useQueryClient();
   const [title, setTitle] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+
   const [isOpen, setIsOpen] = useState(false);
+  const inputRef = useFocus({ isOpen });
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
   };
 
+  const mutation = useMutation({
+    mutationFn: createProjectFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "projects"] });
+      toast.success("Project created");
+      setTitle("");
+    },
+    onError: () => {
+      toast.error("Failed to create project");
+    },
+    onSettled: () => {
+      setIsCreating(false);
+      setIsOpen(false);
+    },
+  });
+
   const handleSubmit = async () => {
     if (!title.trim()) return;
     setIsCreating(true);
-    try {
-      await createProjectFn({ data: { title: title.trim() } });
-      await router.invalidate();
-      setTitle("");
-      toast.success("Project created");
-    } catch {
-      toast.error("Failed to create project");
-    } finally {
-      setIsCreating(false);
-      setIsOpen(false);
-    }
+    mutation.mutateAsync({ data: { title: title.trim() } });
   };
 
   return (
@@ -44,6 +53,7 @@ export const CreateProject = () => {
       <div className="flex flex-col gap-4 my-4">
         <TextInput
           id="title"
+          ref={inputRef}
           label="Enter Project Title"
           name="title"
           placeholder="Title"

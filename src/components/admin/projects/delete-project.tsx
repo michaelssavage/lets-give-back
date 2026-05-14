@@ -1,12 +1,12 @@
 import { deleteProjectFn } from "@/api/projects.api";
 import { Button } from "@/components/button/button";
 import { Modal } from "@/components/modal";
-import { useRouter } from "@tanstack/react-router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const DeleteProject = ({ projectId }: { projectId: string }) => {
-  const router = useRouter();
+  const queryClient = useQueryClient();
   const [isDeleting, setIsDeleting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,18 +14,24 @@ export const DeleteProject = ({ projectId }: { projectId: string }) => {
     setIsOpen(open);
   };
 
-  const handleDelete = async () => {
-    setIsDeleting(true);
-    try {
-      await deleteProjectFn({ data: { id: projectId } });
-      await router.invalidate();
+  const mutation = useMutation({
+    mutationFn: () => deleteProjectFn({ data: { id: projectId } }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "projects"] });
       toast.success("Project deleted");
-    } catch {
+    },
+    onError: () => {
       toast.error("Failed to delete project");
-    } finally {
+    },
+    onSettled: () => {
       setIsDeleting(false);
       setIsOpen(false);
-    }
+    },
+  });
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    mutation.mutateAsync();
   };
 
   return (

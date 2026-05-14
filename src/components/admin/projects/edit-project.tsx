@@ -6,13 +6,13 @@ import { Checkbox } from "@/components/form/checkbox";
 import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
 import { TiptapEditor } from "@/components/tiptap/tiptap-editor";
-import { useRouter } from "@tanstack/react-router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { JSONContent } from "@tiptap/core";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const EditProject = ({ project }: { project: Project }) => {
-  const router = useRouter();
+  const queryClient = useQueryClient();
   const [editedProject, setEditedProject] = useState<Project>(project);
   const [isSaving, setIsSaving] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +27,24 @@ export const EditProject = ({ project }: { project: Project }) => {
   ) => {
     setEditedProject((prev) => ({ ...prev, [field]: value }));
   };
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const description = JSON.stringify(editedProject.description);
+      return updateProjectFn({ data: { ...editedProject, description } });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "projects"] });
+      toast.success("Project saved");
+    },
+    onError: () => {
+      toast.error("Failed to save project");
+    },
+    onSettled: () => {
+      setIsSaving(false);
+      setIsOpen(false);
+    },
+  });
 
   const handleSubmit = async () => {
     if (
@@ -43,25 +61,14 @@ export const EditProject = ({ project }: { project: Project }) => {
     }
 
     setIsSaving(true);
-    try {
-      const description = JSON.stringify(editedProject.description);
-
-      await updateProjectFn({ data: { ...editedProject, description } });
-      await router.invalidate();
-      toast.success("Project saved");
-    } catch {
-      toast.error("Failed to save project");
-    } finally {
-      setIsSaving(false);
-      setIsOpen(false);
-    }
+    mutation.mutateAsync();
   };
 
   return (
     <Modal
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="w-[94vw] max-w-[96vw] sm:max-w-[calc(100vw-3rem)] sm:w-2/3 max-h-[94vh] sm:max-h-[90vh]"
+      className="w-[94vw] sm:w-4/5  max-w-[96vw] sm:max-w-[calc(100vw-3rem)] max-h-[95vh] sm:max-h-[95vh]"
       title="Edit Project"
       description="Edit the project"
       trigger="Edit"

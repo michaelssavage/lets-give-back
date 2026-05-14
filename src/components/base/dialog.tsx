@@ -36,9 +36,9 @@ export const DialogPopup = ({
   return (
     <DialogBase.Popup
       className={cn(
-        "fixed top-1/2 left-1/2 w-120 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2",
+        "fixed top-1/2 left-1/2 w-2/3 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2",
         "rounded-lg bg-card p-6 text-black outline-1 transition-all duration-150",
-        "max-h-[90vh] overflow-y-auto",
+        "max-h-[95vh] overflow-y-auto",
         "data-ending-style:scale-90 data-ending-style:opacity-0",
         "data-starting-style:scale-90 data-starting-style:opacity-0",
         className,
