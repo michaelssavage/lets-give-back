@@ -141,11 +141,19 @@ export const EditProject = ({ project }: { project: Project }) => {
           required
         />
 
-        <TiptapEditor
-          id={`description-${project.id}`}
-          content={editedProject.description}
-          onChange={(content) => handleEditField("description", content)}
-        />
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor={`description-${project.id}`}
+            className="text-sm font-medium text-secondary"
+          >
+            Description <span className="text-red-500">*</span>
+          </label>
+          <TiptapEditor
+            id={`description-${project.id}`}
+            content={editedProject.description}
+            onChange={(content) => handleEditField("description", content)}
+          />
+        </div>
 
         <div className="flex flex-row flex-wrap items-center justify-end gap-2">
           <Button size="sm" variant="outline" onClick={handleOpenChange}>

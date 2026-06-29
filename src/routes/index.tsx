@@ -120,13 +120,13 @@ function App() {
               to="/contact"
               className={buttonStyles({ variant: "primary" })}
             >
-              👉 Get Involved
+              Get Involved
             </Link>
             <Link
               to="/projects"
               className={buttonStyles({ variant: "outline" })}
             >
-              👉 Work With Us
+              Work With Us
             </Link>
           </div>
         </div>
@@ -203,9 +203,9 @@ function App() {
         <h2 className="text-3xl md:text-4xl font-bold text-center">
           Who do we support?
         </h2>
+        <p>(Everyone)</p>
         <p className="mb-4">
-          (Everyone) We work with individuals across a range of settings,
-          including
+          We work with individuals across a range of settings, including:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {SUPPORTED_GROUPS.map((group) => (
