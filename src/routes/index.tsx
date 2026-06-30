@@ -98,10 +98,21 @@ function App() {
     <div>
       <section className="bg-card px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
         <div className="flex flex-col items-center justify-center gap-8 max-w-5xl mx-auto mb-8 md:mb-16">
-          <h1 className="font-bold text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl">
+          <motion.h1
+            className="font-bold text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
             Building Skills, Confidence & Community Through Meaningful Projects
-          </h1>
-          <p className="text-lg text-center text-balance">
+          </motion.h1>
+
+          <motion.p
+            className="text-lg text-center text-balance"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+          >
             <motion.span
               style={{ rotate: badgeRotate }}
               whileHover={{ rotate: "0deg", transition: { duration: 0.2 } }}
@@ -113,9 +124,14 @@ function App() {
             addiction challenges, young people across schools, community and
             residential settings, and older adults in residential care and in
             their own homes.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col xs:flex-row gap-4 *:text-center">
+          <motion.div
+            className="flex flex-col xs:flex-row gap-4 *:text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+          >
             <Link
               to="/contact"
               className={buttonStyles({ variant: "primary" })}
@@ -128,7 +144,7 @@ function App() {
             >
               Work With Us
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -221,7 +237,13 @@ function App() {
 
       <section className="relative bg-white px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 [&_h2]:text-xl md:[&_h2]:text-2xl lg:[&_h2]:text-3xl xl:[&_h2]:text-4xl">
-          <div className="md:mt-50">
+          <motion.div
+            className="md:mt-50"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0 }}
+          >
             <button
               className="group flex flex-row gap-2 cursor-pointer"
               onClick={handleShare}
@@ -246,9 +268,14 @@ function App() {
               Share
               <ArrowUpRightIcon className="size-6 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
             </Button>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}
+          >
             <Anchor
               href="https://revolut.me/letsgiveback"
               className="group flex flex-row gap-2"
@@ -276,9 +303,15 @@ function App() {
               Donate
               <ArrowRightIcon className="size-6 shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
             </Anchor>
-          </div>
+          </motion.div>
 
-          <div className="md:mt-50">
+          <motion.div
+            className="md:mt-50"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+          >
             <Link
               to="/contact-us"
               className="group flex flex-row gap-2 active:scale-105"
@@ -304,7 +337,7 @@ function App() {
               Get Involved
               <ArrowDownRightIcon className="size-6 shrink-0 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-200" />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
