@@ -51,7 +51,7 @@ function RouteComponent() {
         <ArrowLeftIcon /> Back to Projects
       </Link>
 
-      <div className="rounded-2xl overflow-hidden card-shadow aspect-4/3 w-full mb-6">
+      <div className="rounded-sm overflow-hidden aspect-4/3 w-full mb-6">
         {project.image && (
           <img
             src={project.image}

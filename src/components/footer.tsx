@@ -22,7 +22,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="pt-10 pb-6 bg-primary-orange text-white">
+    <footer className="pt-10 pb-6 bg-dark-blue text-white">
       <div className="px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_2fr_2fr_1fr] gap-8 mb-8">
         {/* 1 Logo */}
         <div className="flex flex-col items-center gap-4 md:col-span-2 lg:col-span-1">

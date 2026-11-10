@@ -6,13 +6,24 @@ import {
 import { Anchor } from "@/components/anchor";
 import { PhoneInput } from "@/components/form/phone-input";
 import { TextInput } from "@/components/form/text-input";
-import { PHONE_NUMBER, SITE_URL } from "@/utils/constants";
+import {
+  INVOLVEMENT_REASON_KEYS,
+  INVOLVEMENT_REASONS,
+  PHONE_NUMBER,
+  SITE_URL,
+} from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { z } from "zod";
+
+const contactSearchSchema = z.object({
+  reason: z.enum(INVOLVEMENT_REASON_KEYS).optional().catch(undefined),
+});
 
 export const Route = createFileRoute("/contact")({
   component: RouteComponent,
+  validateSearch: contactSearchSchema,
   head: () => ({
     meta: [
       { title: "Contact Us" },
@@ -30,10 +41,12 @@ export const Route = createFileRoute("/contact")({
 type FormErrors = Partial<Record<keyof ContactFormData, string>>;
 
 function RouteComponent() {
+  const { reason } = Route.useSearch();
   const [form, setForm] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
+    reason,
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -83,12 +96,12 @@ function RouteComponent() {
   }
 
   return (
-    <section className="min-h-[70vh] flex flex-col-reverse md:flex-row gap-8 px-6 md:px-12 py-12">
-      <div className="flex flex-col gap-4 mt-8">
-        <h1 className="text-4xl font-bold text-center md:text-left">
+    <section className="min-h-[70vh] px-6 md:px-12 pt-4 pb-12">
+      <div className="mx-auto w-full max-w-2xl flex flex-col gap-4 bg-white border border-black rounded-sm p-8">
+        <h1 className="text-4xl font-bold">
           Let&apos;s Build Something Meaningful Together
         </h1>
-        <p className="text-secondary mb-4 text-center md:text-left">
+        <p className="text-secondary mb-4">
           Have a project in mind or want to learn more? Fill in the form and
           we&apos;ll get back to you. Or give us a text on{" "}
           <Anchor
@@ -109,23 +122,6 @@ function RouteComponent() {
           </Anchor>{" "}
           if you prefer.
         </p>
-
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d598049.9775066919!2d-7.603985724579202!3d54.160012524398496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48609f42f90be0fb%3A0xd600e0191225b84f!2sMonaghan%2C%20Co.%20Monaghan%2C%20Ireland!5e0!3m2!1sen!2ses!4v1773012139180!5m2!1sen!2ses"
-          width="100%"
-          height="450"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Monaghan, Ireland"
-        />
-      </div>
-
-      <div className="mx-auto md:mx-0 w-full max-w-xl flex flex-col gap-8 bg-white card-shadow rounded-2xl p-8">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-4xl font-bold">Get in touch</h2>
-        </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <TextInput
@@ -157,6 +153,36 @@ function RouteComponent() {
               setForm((prev) => ({ ...prev, phone: value }));
             }}
           />
+          <fieldset className="flex flex-col gap-2">
+            <legend className="text-sm font-medium text-secondary mb-2">
+              How would you like to get involved?{" "}
+              <span className="font-normal text-secondary">(optional)</span>
+            </legend>
+            <div className="flex flex-wrap gap-2">
+              {INVOLVEMENT_REASON_KEYS.map((key) => (
+                <label
+                  key={key}
+                  className="cursor-pointer rounded-full border border-dark-blue px-3 py-1.5 text-sm transition has-checked:bg-dark-blue has-checked:text-white hover:bg-light-blue has-focus-visible:ring-2 has-focus-visible:ring-primary-orange"
+                >
+                  <input
+                    type="radio"
+                    name="reason"
+                    value={key}
+                    checked={form.reason === key}
+                    onChange={() => {}}
+                    onClick={() =>
+                      setForm((prev) => ({
+                        ...prev,
+                        reason: prev.reason === key ? undefined : key,
+                      }))
+                    }
+                    className="sr-only"
+                  />
+                  {INVOLVEMENT_REASONS[key]}
+                </label>
+              ))}
+            </div>
+          </fieldset>
           <TextInput
             id="message"
             name="message"
@@ -177,7 +203,7 @@ function RouteComponent() {
           <button
             type="submit"
             disabled={isPending}
-            className="bg-primary-orange text-white font-semibold rounded-xl py-3 px-6 transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-primary-orange text-white font-semibold rounded-md py-3 px-6 transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isPending ? "Sending..." : "Send message"}
           </button>

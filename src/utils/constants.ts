@@ -17,3 +17,17 @@ export const MONAGHAN_MAP_LINK =
 export const REVOLUT_URL = "https://revolut.me/letsgiveback";
 
 export const MEDIA_URL = "https://media.letsgiveback.ie";
+
+export const INVOLVEMENT_REASONS = {
+  volunteer: "Volunteer my time or skills",
+  project: "Bring a project to my group or service",
+  materials: "Donate timber, tools or materials",
+  partner: "Partner with or fund a project",
+  other: "Something else",
+} as const;
+
+export type InvolvementReason = keyof typeof INVOLVEMENT_REASONS;
+
+export const INVOLVEMENT_REASON_KEYS = Object.keys(
+  INVOLVEMENT_REASONS,
+) as [InvolvementReason, ...InvolvementReason[]];

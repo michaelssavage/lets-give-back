@@ -1,11 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { Resend } from "resend";
+import { INVOLVEMENT_REASON_KEYS, INVOLVEMENT_REASONS } from "@/utils/constants";
 import { z } from "zod";
 
 export const contactFormSchema = z.object({
   name: z.string().min(1).max(100),
   email: z.email().min(1).max(100),
   phone: z.string().optional(),
+  reason: z.enum(INVOLVEMENT_REASON_KEYS).optional(),
   message: z.string().min(1).max(1000),
 });
 
@@ -20,11 +22,14 @@ export const sendContactEmail = createServerFn({ method: "POST" })
       from: "Let's Give Back <noreply@letsgiveback.ie>",
       replyTo: data.email,
       to: "letsgivebackmonaghan@gmail.com",
-      subject: `New message from ${data.name} via letsgiveback.ie`,
+      subject: data.reason
+        ? `${INVOLVEMENT_REASONS[data.reason]}: ${data.name} via letsgiveback.ie`
+        : `New message from ${data.name} via letsgiveback.ie`,
       text: [
         `Name: ${data.name}`,
         `Email: ${data.email}`,
         data.phone ? `Phone: ${data.phone}` : null,
+        data.reason ? `Interested in: ${INVOLVEMENT_REASONS[data.reason]}` : null,
         ``,
         `Message:`,
         data.message,

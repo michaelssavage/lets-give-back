@@ -44,6 +44,13 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
       { property: "og:type", content: "website" },
     ],
     links: [
+      {
+        rel: "preload",
+        href: "/Hanneat-Bold.otf",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "shortcut icon", href: "/favicon.ico" },

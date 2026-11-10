@@ -21,7 +21,7 @@ const GalleryImage = ({
   return (
     <Dialog>
       <DialogTrigger
-        className={`group relative overflow-hidden rounded-xl w-full h-full cursor-zoom-in ${className ?? ""}`}
+        className={`group relative overflow-hidden rounded-md w-full h-full cursor-zoom-in ${className ?? ""}`}
         aria-label={`View image: ${alt}`}
       >
         <img
@@ -59,7 +59,7 @@ export const Gallery = ({ images }: { images: string[] }) => {
 
   if (visible.length === 1) {
     return (
-      <div className="aspect-video w-full rounded-xl overflow-hidden">
+      <div className="aspect-video w-full rounded-md overflow-hidden">
         <GalleryImage src={visible[0]} alt="Gallery image 1" className="" />
       </div>
     );

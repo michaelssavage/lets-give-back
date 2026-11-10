@@ -6,7 +6,9 @@ type CardProps = {
   title: string;
   subtitle: string;
   image: string;
-  variant?: "overlay" | "stacked";
+  /** Small factual line above the title, e.g. the project date */
+  meta?: string;
+  variant?: "overlay" | "stacked" | "row";
   className?: string;
 };
 
@@ -14,14 +16,46 @@ export const Card = ({
   title,
   subtitle,
   image,
+  meta,
   variant = "overlay",
   className,
 }: CardProps) => {
+  if (variant === "row") {
+    return (
+      <article
+        className={cn(
+          "group flex items-center gap-4 sm:gap-6 rounded-sm border border-black bg-background p-3 text-left transition-colors hover:bg-white",
+          className,
+        )}
+      >
+        <img
+          src={image}
+          alt=""
+          loading="lazy"
+          className="w-24 sm:w-36 aspect-4/3 shrink-0 rounded-sm object-cover"
+        />
+
+        <div className="flex-1 min-w-0">
+          {meta && <p className="text-sm text-secondary">{meta}</p>}
+          <h2 className="font-bold text-lg sm:text-xl md:text-2xl">{title}</h2>
+          <p className="text-sm sm:text-base text-secondary line-clamp-2">
+            {subtitle}
+          </p>
+        </div>
+
+        <ArrowRightIcon
+          aria-hidden
+          className="size-6 shrink-0 mr-1 transition-transform duration-200 group-hover:translate-x-1"
+        />
+      </article>
+    );
+  }
+
   if (variant === "overlay") {
     return (
       <div
         className={cn(
-          "flex h-full flex-col overflow-hidden rounded-2xl border border-black card-shadow bg-background",
+          "flex h-full flex-col overflow-hidden rounded-sm border border-black bg-background",
           className,
         )}
       >
@@ -62,7 +96,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden rounded-2xl card-shadow",
+        "flex flex-col overflow-hidden rounded-sm",
         className,
       )}
     >

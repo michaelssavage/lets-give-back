@@ -63,21 +63,19 @@ function RouteComponent() {
           Loading projects
         </span>
       )}
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 gap-4"
-        aria-busy={isLoading}
-      >
+      <div className="flex flex-col gap-4" aria-busy={isLoading}>
         {isLoading
           ? Array.from({ length: 4 }, (_, i) => (
               <div
                 key={i}
-                className="relative overflow-hidden rounded-2xl card-shadow aspect-4/3 animate-pulse bg-secondary/15"
+                className="flex items-center gap-4 sm:gap-6 rounded-sm border border-secondary/20 p-3 animate-pulse"
                 aria-hidden
               >
-                <div className="absolute inset-0 bg-linear-to-t from-secondary/25 via-secondary/10 to-secondary/5" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-3">
-                  <div className="h-7 max-w-[72%] rounded-md bg-secondary/35" />
-                  <div className="h-5 max-w-[95%] rounded-md bg-secondary/25" />
+                <div className="w-24 sm:w-36 aspect-4/3 shrink-0 rounded-sm bg-secondary/15" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-4 w-28 rounded-sm bg-secondary/15" />
+                  <div className="h-6 max-w-[60%] rounded-sm bg-secondary/25" />
+                  <div className="h-4 max-w-[85%] rounded-sm bg-secondary/15" />
                 </div>
               </div>
             ))
@@ -86,11 +84,14 @@ function RouteComponent() {
                 to="/projects/$slug"
                 params={{ slug: project.slug }}
                 key={project.id}
+                className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-orange"
               >
                 <Card
+                  variant="row"
                   title={project.title}
                   subtitle={project.subtitle}
                   image={project.image}
+                  meta={project.date}
                 />
               </Link>
             ))}

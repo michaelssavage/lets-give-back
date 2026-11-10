@@ -1,21 +1,12 @@
 import { Anchor } from "@/components/anchor";
-import { Button } from "@/components/button/button";
 import { buttonStyles } from "@/components/button/button.styles";
 import { Fireworks } from "@/components/fireworks";
-import { SITE_URL } from "@/utils/constants";
+import { PhotoPrint } from "@/components/photo-print";
+import { FACEBOOK_URL, REVOLUT_URL, SITE_URL } from "@/utils/constants";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowDownRightIcon,
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  Check,
-  Handshake,
-  Share2,
-  Sprout,
-} from "lucide-react";
+import { ArrowRightIcon, ArrowUpRightIcon, Check } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import toast from "react-hot-toast";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -39,6 +30,66 @@ const SUPPORTED_GROUPS = [
   "Young people in schools, community resource centres, and residential services",
   "Older adults in residential care and those living independently at home",
 ];
+
+const WORKSHOP_PHOTOS = [
+  {
+    src: "/projects/bailieborough-bench-team.jpg",
+    alt: "A facilitator and a young person assembling bench frames outdoors",
+    caption: "From a pile of timber...",
+    rotate: "-rotate-2",
+  },
+  {
+    src: "/projects/cootehill-drilling.jpg",
+    alt: "A young person drilling a timber box with guidance from a facilitator",
+    caption: "Learning the drill, Cootehill",
+    rotate: "rotate-1",
+  },
+  {
+    src: "/projects/cootehill-bird-table.jpg",
+    alt: "A finished handmade timber bird table on a desk",
+    caption: "One finished bird table",
+    rotate: "-rotate-1",
+  },
+  {
+    src: "/projects/cootehill-kit-box.jpg",
+    alt: "A young person and facilitator building a large timber storage box",
+    caption: "His own idea: a football kit box",
+    rotate: "rotate-2",
+  },
+  {
+    src: "/projects/bailieborough-bench-legs.jpg",
+    alt: "A young person squaring up timber bench legs",
+    caption: "Measure twice, cut once",
+    rotate: "-rotate-2",
+  },
+];
+
+const WAYS_TO_HELP = [
+  {
+    title: "Volunteer",
+    text: "Come along to a build day. Helping out can mean measuring, sanding, painting, driving the van or making the tea. You don't need any experience.",
+    cta: "Volunteer",
+    reason: "volunteer",
+  },
+  {
+    title: "Suggest a project",
+    text: "Do you run a school, youth club, day service or care home? Tell us what you'd like built or repaired, and who'll be building it with us.",
+    cta: "Suggest a project",
+    reason: "project",
+  },
+  {
+    title: "Donate materials",
+    text: "We use timber offcuts, pallets, leftover paint, plants and working tools. Let us know what you have.",
+    cta: "Offer materials",
+    reason: "materials",
+  },
+  {
+    title: "Fund a programme",
+    text: "CMETB funds our youth workshops with Foróige in Cavan. If your organisation could fund a programme in your area, we'd like to hear from you.",
+    cta: "Get in touch",
+    reason: "partner",
+  },
+] as const;
 
 const row1 = [
   "/tools/hammer.svg",
@@ -75,24 +126,6 @@ function App() {
     [0, 0.2],
     ["-4deg", "0deg"],
   );
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Let's Give Back",
-          text: "A community-focused organisation in Co. Monaghan, Ireland",
-          url: window.location.href,
-        });
-      } catch (err: unknown) {
-        if (err instanceof Error && err.name !== "AbortError")
-          console.error(err);
-      }
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast.success("Link copied to clipboard!");
-    }
-  };
 
   return (
     <div>
@@ -133,7 +166,8 @@ function App() {
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
           >
             <Link
-              to="/contact"
+              to="/"
+              hash="get-involved"
               className={buttonStyles({ variant: "primary" })}
             >
               Get Involved
@@ -175,7 +209,7 @@ function App() {
           })}
         </div>
 
-        <div className="card-shadow flex flex-col items-center justify-center gap-4 max-w-4xl rounded-2xl p-6 md:p-12 border relative z-10 my-12 md:my-24 mx-6 bg-background">
+        <div className=" flex flex-col items-center justify-center gap-4 max-w-4xl rounded-sm p-6 md:p-12 border relative z-10 my-12 md:my-24 mx-6 bg-background">
           <div className="absolute -top-4 -right-4">
             <Fireworks />
           </div>
@@ -215,7 +249,60 @@ function App() {
         </div>
       </section>
 
-      <section className="bg-light-orange px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
+      <section
+        aria-labelledby="workshop-heading"
+        className="bg-light-green px-6 py-12 md:px-12 overflow-hidden"
+      >
+        <div className="px-6 md:px-12 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+          <div>
+            <h2
+              id="workshop-heading"
+              className="text-3xl md:text-4xl font-bold"
+            >
+              Recent builds
+            </h2>
+            <p className="text-lg mt-2 max-w-2xl">
+              Bird boxes in Cootehill and a garden bench in Bailieborough, built
+              with young people from Foróige.
+            </p>
+          </div>
+          <Anchor
+            href={FACEBOOK_URL}
+            isExternal
+            className={buttonStyles({
+              variant: "outline",
+              size: "sm",
+              className: "w-fit group shrink-0 text-nowrap",
+            })}
+          >
+            More on Facebook
+            <ArrowUpRightIcon className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+          </Anchor>
+        </div>
+
+        <ul className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 pt-4 pb-8 [scrollbar-width:thin]">
+          {WORKSHOP_PHOTOS.map((photo, i) => (
+            <motion.li
+              key={photo.src}
+              className="snap-center shrink-0 w-56 sm:w-64 lg:w-72"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.08 }}
+            >
+              <PhotoPrint
+                src={photo.src}
+                alt={photo.alt}
+                caption={photo.caption}
+                taped={i % 2 === 0}
+                className={`${photo.rotate} hover:rotate-0 transition-transform duration-200`}
+              />
+            </motion.li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="bg-light-orange px-6 py-12 md:px-12 min-h-[60vh] grid place-items-center">
         <h2 className="text-3xl md:text-4xl font-bold text-center">
           Who do we support?
         </h2>
@@ -227,7 +314,7 @@ function App() {
           {SUPPORTED_GROUPS.map((group) => (
             <p
               key={group}
-              className="grid place-items-center text-lg sm:text-xl md:text-2xl card-shadow rounded-2xl py-4 px-6 bg-white font-bold text-center hover:-rotate-2 transition-transform duration-200"
+              className="border border-black grid place-items-center text-lg sm:text-xl rounded-sm py-2 sm:py-4 px-4 sm:px-6 bg-white font-bold text-center hover:-rotate-2 transition-transform duration-200"
             >
               {group}
             </p>
@@ -235,115 +322,9 @@ function App() {
         </div>
       </section>
 
-      <section className="relative bg-white px-6 py-8 md:px-12 min-h-[60vh] grid place-items-center">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 [&_h2]:text-xl md:[&_h2]:text-2xl lg:[&_h2]:text-3xl xl:[&_h2]:text-4xl">
-          <motion.div
-            className="md:mt-50"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: 0 }}
-          >
-            <button
-              className="group flex flex-row gap-2 cursor-pointer"
-              onClick={handleShare}
-            >
-              <Share2 className="shrink-0 size-8 md:size-10 group-hover:text-primary-orange" />
-              <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-orange">
-                Skill Building
-              </h2>
-            </button>
-            <p className="text-lg md:text-xl mb-2">
-              We support people to develop practical life skills through
-              hands-on, structured activities that build confidence and
-              independence.
-            </p>
-
-            <Button
-              onClick={handleShare}
-              size="sm"
-              variant="outline"
-              className="group flex items-center gap-1"
-            >
-              Share
-              <ArrowUpRightIcon className="size-6 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}
-          >
-            <Anchor
-              href="https://revolut.me/letsgiveback"
-              className="group flex flex-row gap-2"
-              isExternal
-            >
-              <Sprout className="shrink-0 size-8 md:size-10 text-primary-green" />
-              <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-green">
-                Person-Centred Projects
-              </h2>
-            </Anchor>
-            <p className="text-lg md:text-xl mb-2">
-              We design and deliver tailored projects based on individual
-              interests, supporting meaningful engagement and participation.
-            </p>
-
-            <Anchor
-              href="https://revolut.me/letsgiveback"
-              className={buttonStyles({
-                variant: "outline",
-                size: "sm",
-                className: "w-fit group flex items-center gap-1",
-              })}
-              isExternal
-            >
-              Donate
-              <ArrowRightIcon className="size-6 shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
-            </Anchor>
-          </motion.div>
-
-          <motion.div
-            className="md:mt-50"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
-          >
-            <Link
-              to="/contact-us"
-              className="group flex flex-row gap-2 active:scale-105"
-            >
-              <Handshake className="shrink-0 size-8 md:size-10 group-hover:text-primary-orange" />
-              <h2 className="decoration-5 group-hover:underline group-hover:decoration-primary-orange">
-                Community Connection
-              </h2>
-            </Link>
-            <p className="text-lg md:text-xl mb-2">
-              We create opportunities for connection between individuals,
-              services, and communities to promote inclusion and reduce
-              isolation.
-            </p>
-            <Link
-              to="/contact-us"
-              className={buttonStyles({
-                variant: "outline",
-                size: "sm",
-                className: "w-fit group flex items-center gap-1",
-              })}
-            >
-              Get Involved
-              <ArrowDownRightIcon className="size-6 shrink-0 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-200" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="bg-card px-6 py-8 md:px-12 min-h-[60vh]">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-left w-fit">
-          Projects <span className="text-primary-orange italic">in</span> Action
+      <section className="bg-card px-6 py-12 md:px-12 min-h-[60vh]">
+        <h2 className="text-3xl md:text-4xl font-bold text-left w-fit">
+          Projects in Action
         </h2>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-between items-end mt-2 mb-8">
@@ -367,24 +348,18 @@ function App() {
         </div>
 
         <div className="space-y-8">
-          <div className="flex flex-col sm:flex-row gap-x-4 w-full overflow-hidden rounded-2xl border border-black card-shadow">
+          <div className="flex flex-col sm:flex-row gap-x-4 w-full overflow-hidden rounded-sm border border-black">
             <div className="aspect-video w-full overflow-hidden flex-1 p-8 bg-light-green">
               <img
                 src="/assets/plant.jpg"
                 alt="Project 1"
-                className="w-full h-full object-cover card-shadow"
+                className="w-full h-full object-cover"
               />
             </div>
 
             <div className="py-6 px-8 flex flex-col gap-1 flex-1">
-              <div className="flex flex-row gap-2 items-center mb-2">
-                <h2 className="text-4xl md:text-5xl font-bold text-primary-green">
-                  01
-                </h2>
-                <div className="w-full h-px bg-black" />
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                Garden & Outdoor Space Project
+              <h3 className="text-2xl md:text-3xl font-bold mt-3">
+                Garden & Outdoor Space
               </h3>
 
               <p>
@@ -418,16 +393,10 @@ function App() {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse sm:flex-row gap-x-4 w-full overflow-hidden rounded-2xl border border-black card-shadow">
+          <div className="flex flex-col-reverse sm:flex-row gap-x-4 w-full overflow-hidden rounded-sm border border-black">
             <div className="py-6 sm:py-6 px-4 sm:px-8 flex flex-col gap-1 flex-1">
-              <div className="flex flex-row gap-2 items-center mb-2">
-                <h2 className="text-4xl md:text-5xl font-bold text-primary-orange">
-                  02
-                </h2>
-                <div className="w-full h-px bg-black" />
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                Outdoor Games Project
+              <h3 className="text-2xl md:text-3xl font-bold mt-3">
+                Outdoor Games
               </h3>
 
               <p>
@@ -463,10 +432,96 @@ function App() {
               <img
                 src="/assets/checkboard.jpg"
                 alt="Project 2"
-                className="w-full h-full object-cover card-shadow"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section
+        id="get-involved"
+        aria-labelledby="get-involved-heading"
+        className="bg-white px-6 py-12 md:px-12 scroll-mt-24"
+      >
+        <h2
+          id="get-involved-heading"
+          className="text-3xl md:text-4xl font-bold"
+        >
+          Get involved
+        </h2>
+        <p className="text-lg mt-2 mb-10 max-w-2xl text-balance">
+          We run on volunteers, donated materials and local funding. Pick
+          whichever suits you and we&apos;ll get back to you.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {WAYS_TO_HELP.map((way, i) => (
+            <motion.div
+              key={way.reason}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut",
+                delay: (i % 3) * 0.1,
+              }}
+              className="bg-card flex flex-col gap-3 rounded-sm border border-black p-6"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold">{way.title}</h3>
+              <p className="flex-1">{way.text}</p>
+              <Link
+                to="/contact"
+                search={{ reason: way.reason }}
+                className={buttonStyles({
+                  variant: "outline",
+                  size: "sm",
+                  className: "w-fit group flex items-center gap-1 bg-white",
+                })}
+              >
+                {way.cta}
+                <ArrowRightIcon className="shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </motion.div>
+          ))}
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+            className="bg-card flex flex-col gap-3 rounded-sm border border-black p-6"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold">Donate</h3>
+            <p className="flex-1">
+              Donations pay for the timber, screws, paint and tools that go into
+              community projects. You can donate through Revolut.
+            </p>
+            <Anchor
+              href={REVOLUT_URL}
+              isExternal
+              className={buttonStyles({
+                variant: "primary",
+                size: "sm",
+                className: "w-fit group",
+              })}
+            >
+              Donate on Revolut
+              <ArrowUpRightIcon className="shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+            </Anchor>
+          </motion.div>
+
+          <motion.img
+            src="/projects/bailieborough-bench-build.jpg"
+            alt="A young person from Foróige assembling a timber bench frame with a Let's Give Back facilitator in Bailieborough"
+            loading="lazy"
+            className="w-full h-full max-h-72 object-cover object-[50%_70%] rounded-sm border border-black"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+          />
         </div>
       </section>
     </div>

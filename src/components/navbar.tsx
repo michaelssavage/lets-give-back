@@ -53,7 +53,7 @@ export const Navbar = () => {
           </button>
         </div>
       ) : null}
-      <nav className="rounded-2xl flex items-center justify-between mx-4">
+      <nav className="flex items-center justify-between mx-4">
         <Link
           to="/"
           className="shrink-0 px-6 hover:rotate-12 transition-transform duration-200"
@@ -72,7 +72,7 @@ export const Navbar = () => {
             <Link
               to={link.to}
               key={link.to}
-              className={`text-2xl font-hanneat uppercase font-semibold px-4 hover:text-primary-orange ${
+              className={`text-2xl font-heading font-semibold tracking-tight px-4 hover:text-primary-orange ${
                 pathname === link.to ? "text-dark-orange" : "text-dark-blue"
               }`}
             >
@@ -96,14 +96,14 @@ export const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="absolute top-full inset-x-0 w-full bg-card shadow-lg rounded-xl z-11 py-6 flex flex-col items-center md:hidden"
+              className="absolute top-full inset-x-0 w-full bg-card shadow-lg rounded-md z-11 py-6 flex flex-col items-center md:hidden"
             >
               {links.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className="text-xl font-hanneat uppercase font-semibold py-3 hover:text-primary-orange"
+                  className="text-xl font-heading font-semibold tracking-tight py-3 hover:text-primary-orange"
                 >
                   {link.label}
                 </Link>
@@ -111,7 +111,7 @@ export const Navbar = () => {
               {user ? (
                 <button
                   type="button"
-                  className="flex leading-none items-center gap-2 text-xl font-hanneat uppercase font-semibold py-3 hover:text-primary-orange"
+                  className="flex leading-none items-center gap-2 text-xl font-heading font-semibold tracking-tight py-3 hover:text-primary-orange"
                   onClick={() => {
                     setOpen(false);
                     logoutMutation.mutate({ data: undefined });

@@ -10,12 +10,16 @@
       "binding": "DB",
       "database_name": "auth",
       "database_id": "b88546e1-d5ef-4c38-9624-39af1f95e524",
+      // Local dev reads and writes the production database (no separate local DB)
+      // "remote": true,
     },
   ],
   "r2_buckets": [
     {
       "binding": "MEDIA_BUCKET",
       "bucket_name": "media",
+      // Local dev uses the production media bucket
+      // "remote": true,
     },
   ],
 }

@@ -105,7 +105,7 @@ function RouteComponent() {
 
             const imageBlock = (
               <div
-                className={`md:col-span-2 rounded-2xl overflow-hidden h-full ${
+                className={`md:col-span-2 rounded-sm overflow-hidden h-full ${
                   !imageFirst ? "md:order-2" : "md:order-1"
                 }`}
               >
@@ -119,7 +119,7 @@ function RouteComponent() {
 
             const textBlock = (
               <div
-                className={`border border-black card-shadow bg-white rounded-2xl p-4 h-full flex flex-col justify-center ${
+                className={`border border-black bg-white rounded-sm p-4 h-full flex flex-col justify-center ${
                   !imageFirst ? "md:order-1" : "md:order-2"
                 }`}
               >
