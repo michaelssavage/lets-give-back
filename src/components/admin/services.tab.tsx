@@ -108,10 +108,6 @@ export const ServicesTab = () => {
 
   return (
     <section className="w-full mt-8">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
-        <h2>Services</h2>
-      </div>
-
       <div className="flex flex-col gap-8 my-4">
         {pairs.length === 0 ? (
           <p className="text-gray-500">No services found</p>

@@ -5,14 +5,15 @@ import {
 } from "@/api/projects.api";
 import { CreateProject } from "@/components/admin/projects/create-project";
 import { DeleteProject } from "@/components/admin/projects/delete-project";
-import { EditProject } from "@/components/admin/projects/edit-project";
 import { Button } from "@/components/button/button";
+import { buttonStyles } from "@/components/button/button.styles";
 import {
   DragHandle,
   SortableItem,
   SortableList,
 } from "@/components/drag-and-drop/sortable";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -39,16 +40,12 @@ export const ProjectsTab = () => {
 
   return (
     <section className="w-full mt-4 md:mt-8">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
-        <h2>Projects</h2>
+      <div className="flex items-center gap-2 ml-7">
+        <CreateProject />
 
-        <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" onClick={handleSaveOrder}>
-            Save Order
-          </Button>
-
-          <CreateProject />
-        </div>
+        <Button size="sm" variant="outline" onClick={handleSaveOrder}>
+          Save Order
+        </Button>
       </div>
 
       <div className="flex flex-col gap-4 my-4">
@@ -81,11 +78,23 @@ export const ProjectsTab = () => {
                             </span>
                           )}
                         </p>
+                        <p className="text-sm text-secondary/80">
+                          {project.date}
+                        </p>
                         <p>{project.subtitle}</p>
                       </div>
 
                       <div className="flex sm:items-center gap-2 w-full sm:w-fit justify-between sm:justify-end mt-2 sm:mt-0">
-                        <EditProject project={project} />
+                        <Link
+                          to="/admin/projects/$id"
+                          params={{ id: project.id }}
+                          className={buttonStyles({
+                            variant: "outline",
+                            size: "sm",
+                          })}
+                        >
+                          Edit
+                        </Link>
                         <DeleteProject projectId={project.id} />
                       </div>
                     </div>

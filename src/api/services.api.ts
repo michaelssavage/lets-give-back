@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/api/auth.server";
 import { createServerFn } from "@tanstack/react-start";
 import { env } from "cloudflare:workers";
 import { z } from "zod";
@@ -75,6 +76,7 @@ const createServiceSchema = z.discriminatedUnion("type", [
 export const createServiceFn = createServerFn({ method: "POST" })
   .inputValidator(createServiceSchema)
   .handler(async ({ data }) => {
+    await requireAdmin();
     const id = crypto.randomUUID();
     const created_date = new Date().toISOString().split("T")[0];
 
@@ -123,6 +125,7 @@ const updateServiceSchema = z.discriminatedUnion("type", [
 export const updateServiceFn = createServerFn({ method: "POST" })
   .inputValidator(updateServiceSchema)
   .handler(async ({ data }) => {
+    await requireAdmin();
     if (data.type === "image") {
       await env.DB.prepare(
         `UPDATE services
@@ -146,6 +149,7 @@ export const updateServiceFn = createServerFn({ method: "POST" })
 export const deleteServiceFn = createServerFn({ method: "POST" })
   .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data }) => {
+    await requireAdmin();
     await env.DB.prepare("DELETE FROM services WHERE id = ?")
       .bind(data.id)
       .run();

@@ -20,7 +20,13 @@ Only add what can't be derived from the code, config or git history.
 
 ## Design and copy
 
-See `tasks/*-patterns.md`.
+Before changing UI or copy, read the matching doc in `docs/` and check the change against it:
+
+- `docs/conceptual-patterns.md`: copy and content (C1–C7). Every match is a defect.
+- `docs/structural-patterns.md`: page layout and section order (S1–S9).
+- `docs/visual-patterns.md`: colour, type, spacing, effects (V1–V9).
+
+For S and V patterns, check "When it's not slop" before treating a match as a problem.
 
 - Facts over emotional beats. No slogans or filler.
 - No decorative icons on cards.

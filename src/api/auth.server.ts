@@ -47,6 +47,12 @@ export async function getCurrentUserFromSession() {
   return session.data.user ?? null;
 }
 
+export async function requireAdmin() {
+  const user = await getCurrentUserFromSession();
+  if (!user) throw new Error("Unauthorized");
+  return user;
+}
+
 export async function clearAppSession() {
   const session = await getAppSession();
   await session.clear();

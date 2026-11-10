@@ -57,14 +57,14 @@ export const GalleryTab = () => {
 
   return (
     <section className="w-full mt-4 md:mt-8">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
-        <h2>Gallery</h2>
-        {images && images.length > 0 && (
-          <Button onClick={toggleSelectAll} variant="outline" size="sm">
-            {allSelected ? "Deselect all" : "Select all"}
-          </Button>
-        )}
-      </div>
+      <Button
+        onClick={toggleSelectAll}
+        variant="outline"
+        size="sm"
+        disabled={!images || images.length === 0}
+      >
+        {allSelected ? "Deselect all" : "Select all"}
+      </Button>
 
       {isLoading && (
         <p className="text-sm text-gray-500 py-12 text-center">

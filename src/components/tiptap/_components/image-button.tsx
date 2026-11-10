@@ -1,9 +1,11 @@
 import { ImageUpload } from "@/components/admin/projects/image-upload";
 import {
   Dialog,
+  DialogBackdrop,
   DialogDescription,
   DialogHeader,
   DialogPopup,
+  DialogPortal,
   DialogTitle,
 } from "@/components/base/dialog";
 import { Button } from "@/components/button/button";
@@ -38,18 +40,21 @@ export const ImageButton = ({ editor }: ImageButtonProps) => {
       </Button>
 
       <Dialog open={isImageDialogOpen} onOpenChange={setIsImageDialogOpen}>
-        <DialogPopup>
-          <DialogHeader>
-            <DialogTitle>Add Image</DialogTitle>
-            <DialogDescription>Add an image to the editor</DialogDescription>
-          </DialogHeader>
+        <DialogPortal>
+          <DialogBackdrop />
+          <DialogPopup>
+            <DialogHeader>
+              <DialogTitle>Add Image</DialogTitle>
+              <DialogDescription>Add an image to the editor</DialogDescription>
+            </DialogHeader>
 
-          <ImageUpload
-            folder="projects"
-            onUpload={(url) => addImage(url)}
-            allowMultiple
-          />
-        </DialogPopup>
+            <ImageUpload
+              folder="projects"
+              onUpload={(url) => addImage(url)}
+              allowMultiple
+            />
+          </DialogPopup>
+        </DialogPortal>
       </Dialog>
     </>
   );

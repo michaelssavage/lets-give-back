@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <section className="min-h-[70vh] grid place-items-center px-6">
-      <div className="bg-white p-8 rounded-sm border border-black xs:min-w-75">
+      <div className="bg-white p-8 rounded-sm border border-black xs:min-w-2xl">
         <h1 className="text-2xl font-bold mb-4">Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4 w-full">
           <TextInput

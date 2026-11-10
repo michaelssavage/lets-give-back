@@ -6,7 +6,7 @@ import {
   useRouteContext,
   useRouter,
 } from "@tanstack/react-router";
-import { LogOut, Menu } from "lucide-react";
+import { LogIn, LogOut, Menu, User } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
@@ -36,8 +36,15 @@ export const Navbar = () => {
     <header className="pt-4 md:pt-8 px-0 md:px-4 bg-card relative">
       {user ? (
         <div className="absolute top-2 right-4 flex items-center gap-2">
-          <span className="hidden xs:inline">{user.email}</span>
+          <span className="hidden xs:inline">Logged in as {user.email}</span>
           <span className="inline xs:hidden">Admin</span>
+
+          <Link
+            to="/admin"
+            className="hover:text-primary-orange text-dark-blue cursor-pointer"
+          >
+            <User className="size-5" />
+          </Link>
           <button
             type="button"
             className="hover:text-primary-orange text-dark-blue cursor-pointer"
@@ -52,7 +59,16 @@ export const Navbar = () => {
             )}
           </button>
         </div>
-      ) : null}
+      ) : (
+        <Link
+          to="/login"
+          className="absolute top-2 right-4 flex items-center gap-2 text-dark-blue hover:text-primary-orange"
+          title="Login"
+        >
+          <LogIn className="size-5" />
+          <span className="hidden xs:inline">Login</span>
+        </Link>
+      )}
       <nav className="flex items-center justify-between mx-4">
         <Link
           to="/"
@@ -121,7 +137,16 @@ export const Navbar = () => {
                   <LogOut className="size-6 -mt-[0.4rem]" />
                   {logoutMutation.status === "pending" ? "..." : "Logout"}
                 </button>
-              ) : null}
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex leading-none items-center gap-2 text-xl font-heading font-semibold tracking-tight py-3 hover:text-primary-orange"
+                >
+                  <LogIn className="size-6 -mt-[0.4rem]" />
+                  Login
+                </Link>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

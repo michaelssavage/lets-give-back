@@ -4,11 +4,13 @@ import { TextInput } from "@/components/form/text-input";
 import { Modal } from "@/components/modal";
 import { useFocus } from "@/hooks/use-focus.hook";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const CreateProject = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [isCreating, setIsCreating] = useState(false);
 
@@ -21,10 +23,11 @@ export const CreateProject = () => {
 
   const mutation = useMutation({
     mutationFn: createProjectFn,
-    onSuccess: () => {
+    onSuccess: ({ id }) => {
       queryClient.invalidateQueries({ queryKey: ["admin", "projects"] });
       toast.success("Project created");
       setTitle("");
+      navigate({ to: "/admin/projects/$id", params: { id } });
     },
     onError: () => {
       toast.error("Failed to create project");

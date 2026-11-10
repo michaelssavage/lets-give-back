@@ -1,3 +1,4 @@
+import { getCurrentUserFromSession, requireAdmin } from "@/api/auth.server";
 import { createServerFn } from "@tanstack/react-start";
 import type { JSONContent } from "@tiptap/core";
 import { env } from "cloudflare:workers";
@@ -40,8 +41,11 @@ function rowToProject(row: ProjectRow): Project {
 
 export const getProjectsFn = createServerFn({ method: "GET" }).handler(
   async () => {
+    const user = await getCurrentUserFromSession();
     const { results } = await env.DB.prepare(
-      "SELECT * FROM projects ORDER BY sort_order ASC",
+      user
+        ? "SELECT * FROM projects ORDER BY sort_order ASC"
+        : "SELECT * FROM projects WHERE is_draft = 0 ORDER BY sort_order ASC",
     ).all<ProjectRow>();
     return results.map(rowToProject);
   },
@@ -50,10 +54,24 @@ export const getProjectsFn = createServerFn({ method: "GET" }).handler(
 export const getProjectBySlugFn = createServerFn({ method: "GET" })
   .inputValidator(z.object({ slug: z.string() }))
   .handler(async ({ data }) => {
+    const user = await getCurrentUserFromSession();
     const row = await env.DB.prepare(
-      "SELECT * FROM projects WHERE slug = ? LIMIT 1",
+      user
+        ? "SELECT * FROM projects WHERE slug = ? LIMIT 1"
+        : "SELECT * FROM projects WHERE slug = ? AND is_draft = 0 LIMIT 1",
     )
       .bind(data.slug)
+      .first<ProjectRow | null>();
+    if (!row) return null;
+    return rowToProject(row);
+  });
+
+export const getProjectByIdFn = createServerFn({ method: "GET" })
+  .inputValidator(z.object({ id: z.string() }))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const row = await env.DB.prepare("SELECT * FROM projects WHERE id = ? LIMIT 1")
+      .bind(data.id)
       .first<ProjectRow | null>();
     if (!row) return null;
     return rowToProject(row);
@@ -74,6 +92,7 @@ const updateProjectSchema = z.object({
 export const updateProjectFn = createServerFn({ method: "POST" })
   .inputValidator(updateProjectSchema)
   .handler(async ({ data }) => {
+    await requireAdmin();
     await env.DB.prepare(
       `UPDATE projects
        SET slug = ?, date = ?, title = ?, subtitle = ?, description = ?, image = ?, facebook = ?, is_draft = ?
@@ -97,6 +116,7 @@ export const updateProjectFn = createServerFn({ method: "POST" })
 export const saveProjectOrderFn = createServerFn({ method: "POST" })
   .inputValidator(z.object({ projects: z.array(z.object({ id: z.string() })) }))
   .handler(async ({ data }) => {
+    await requireAdmin();
     await env.DB.batch(
       data.projects.map((project, index) =>
         env.DB.prepare("UPDATE projects SET sort_order = ? WHERE id = ?").bind(
@@ -111,6 +131,7 @@ export const saveProjectOrderFn = createServerFn({ method: "POST" })
 export const createProjectFn = createServerFn({ method: "POST" })
   .inputValidator(z.object({ title: z.string().min(1) }))
   .handler(async ({ data }) => {
+    await requireAdmin();
     const id = crypto.randomUUID();
     const slug = data.title
       .toLowerCase()
@@ -136,6 +157,7 @@ export const createProjectFn = createServerFn({ method: "POST" })
 export const deleteProjectFn = createServerFn({ method: "POST" })
   .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data }) => {
+    await requireAdmin();
     await env.DB.prepare("DELETE FROM projects WHERE id = ?")
       .bind(data.id)
       .run();
