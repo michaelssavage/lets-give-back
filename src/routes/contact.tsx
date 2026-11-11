@@ -96,9 +96,9 @@ function RouteComponent() {
   }
 
   return (
-    <section className="min-h-[70vh] px-6 md:px-12 pt-4 pb-12">
-      <div className="mx-auto w-full max-w-2xl flex flex-col gap-4 bg-white border border-black rounded-sm p-8">
-        <h1 className="text-4xl font-bold">
+    <section className="min-h-[70vh] px-4 xs:px-6 md:px-12 pt-4 pb-12">
+      <div className="mx-auto w-full max-w-2xl flex flex-col gap-4 bg-white border border-black rounded-sm py-4 px-6 xs:p-8">
+        <h1 className="text-3xl xs:text-4xl font-bold text-center xs:text-left">
           Let&apos;s Build Something Meaningful Together
         </h1>
         <p className="text-secondary mb-4">

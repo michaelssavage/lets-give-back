@@ -23,9 +23,9 @@ export const Footer = () => {
 
   return (
     <footer className="pt-10 pb-6 bg-dark-blue text-white">
-      <div className="px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_2fr_2fr_1fr] gap-8 mb-8">
+      <div className="px-8 grid grid-cols-2 lg:grid-cols-[2fr_2fr_2fr_1fr] gap-4 md:gap-8 mb-8">
         {/* 1 Logo */}
-        <div className="flex flex-col items-center gap-4 md:col-span-2 lg:col-span-1">
+        <div className="flex flex-col items-center gap-4 col-span-2 lg:col-span-1">
           <p className="text-3xl md:text-4xl font-bold flex flex-col text-center md:text-left">
             <span className="whitespace-nowrap">Let&apos;s Give</span>
             <span className="whitespace-nowrap">Back CLG</span>
@@ -80,7 +80,10 @@ export const Footer = () => {
             isExternal
           >
             <Phone size={24} className="stroke-white shrink-0" />
-            {PHONE_NUMBER.replace("+353 ", "0")}
+            <span className="hidden xs:inline">
+              {PHONE_NUMBER.replace("+353 ", "0")}
+            </span>
+            <span className="inline xs:hidden">Phone</span>
           </Anchor>
 
           <Anchor href={REVOLUT_URL} className="hover:underline" isExternal>

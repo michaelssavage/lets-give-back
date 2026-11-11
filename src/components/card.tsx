@@ -36,16 +36,16 @@ export const Card = ({
         />
 
         <div className="flex-1 min-w-0">
-          {meta && <p className="text-sm text-secondary">{meta}</p>}
           <h2 className="font-bold text-lg sm:text-xl md:text-2xl">{title}</h2>
-          <p className="text-sm sm:text-base text-secondary line-clamp-2">
+          {meta && <p className="text-sm text-secondary">{meta}</p>}
+          <p className="text-sm sm:text-base text-secondary line-clamp-3">
             {subtitle}
           </p>
         </div>
 
         <ArrowRightIcon
           aria-hidden
-          className="size-6 shrink-0 mr-1 transition-transform duration-200 group-hover:translate-x-1"
+          className="hidden sm:inline-block size-6 shrink-0 mr-1 transition-transform duration-200 group-hover:translate-x-1"
         />
       </article>
     );
@@ -94,12 +94,7 @@ export const Card = ({
   }
 
   return (
-    <div
-      className={cn(
-        "flex flex-col overflow-hidden rounded-sm",
-        className,
-      )}
-    >
+    <div className={cn("flex flex-col overflow-hidden rounded-sm", className)}>
       <div className="aspect-video w-full overflow-hidden">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>

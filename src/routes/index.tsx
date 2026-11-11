@@ -160,7 +160,7 @@ function App() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col xs:flex-row gap-4 *:text-center"
+            className="flex flex-row gap-2 md:gap-4 *:text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
@@ -168,13 +168,19 @@ function App() {
             <Link
               to="/"
               hash="get-involved"
-              className={buttonStyles({ variant: "primary" })}
+              className={buttonStyles({
+                variant: "primary",
+                className: "text-sm md:text-base",
+              })}
             >
               Get Involved
             </Link>
             <Link
               to="/projects"
-              className={buttonStyles({ variant: "outline" })}
+              className={buttonStyles({
+                variant: "outline",
+                className: "text-sm md:text-base",
+              })}
             >
               Work With Us
             </Link>
@@ -261,7 +267,7 @@ function App() {
             >
               Recent builds
             </h2>
-            <p className="text-lg mt-2 max-w-2xl">
+            <p className="text-lg mt-2 max-w-2xl text-pretty">
               Bird boxes in Cootehill and a garden bench in Bailieborough, built
               with young people from Foróige.
             </p>
@@ -327,8 +333,8 @@ function App() {
           Projects in Action
         </h2>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-between items-end mt-2 mb-8">
-          <p className="text-lg text-left text-balance">
+        <div className="flex flex-col sm:flex-row gap-3 justify-between mt-2 mb-8">
+          <p className="text-lg text-left text-pretty">
             Real projects, designed with the people they&apos;re for. Each one
             is shaped around individual interests, abilities, and goals.
           </p>
@@ -450,7 +456,7 @@ function App() {
         >
           Get involved
         </h2>
-        <p className="text-lg mt-2 mb-10 max-w-2xl text-balance">
+        <p className="text-lg mt-2 mb-10 max-w-2xl text-pretty">
           We run on volunteers, donated materials and local funding. Pick
           whichever suits you and we&apos;ll get back to you.
         </p>

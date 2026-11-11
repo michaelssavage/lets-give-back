@@ -62,7 +62,7 @@ export const Navbar = () => {
       ) : (
         <Link
           to="/login"
-          className="absolute top-2 right-4 flex items-center gap-2 text-dark-blue hover:text-primary-orange"
+          className="hidden md:flex absolute top-2 right-4 items-center gap-2 text-dark-blue hover:text-primary-orange"
           title="Login"
         >
           <LogIn className="size-5" />
